@@ -4,7 +4,6 @@ import {
   Column,
   OneToOne,
   JoinColumn,
-  OneToMany,
 } from 'typeorm';
 
 import DadosPessoais from './DadosPessoais';
@@ -20,7 +19,7 @@ export enum RegraEnum {
 }
 
 @Entity()
-class GCM {
+class Gcm {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -40,7 +39,7 @@ class GCM {
   @Column()
   endereco_id: string;
 
-  @OneToMany(() => Endereco, GcmEnderecos => GcmEnderecos.Enderecos)
+  @OneToOne(() => Endereco)
   @JoinColumn({ name: 'endereco_id' })
   Enderecos: Endereco;
 
@@ -48,4 +47,4 @@ class GCM {
   regra: string;
 }
 
-export default GCM;
+export default Gcm;
