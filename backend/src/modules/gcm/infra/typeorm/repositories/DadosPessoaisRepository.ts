@@ -1,10 +1,10 @@
 import { getRepository, Repository } from 'typeorm';
 
 import DadosPessoais from '@modules/gcm/infra/typeorm/entities/DadosPessoais';
-import IDadosPessoais from '@modules/gcm/repositories/IDadosPessoaisRepository';
+import IDadosPessoaisRepository from '@modules/gcm/repositories/IDadosPessoaisRepository';
 import ICreateDadosPessoaisDTO from '@modules/gcm/dtos/ICreateDadosPessoaisDTO';
 
-class DadosPessoaisRepository implements IDadosPessoais {
+class DadosPessoaisRepository implements IDadosPessoaisRepository {
   private ormRepository: Repository<DadosPessoais>;
 
   constructor() {

@@ -30,6 +30,15 @@ class Gcm {
   nome_guerra: string;
 
   @Column()
+  nome_usuario: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  senha: string;
+
+  @Column()
   dados_pessoais_id: string;
 
   @OneToOne(() => DadosPessoais)
@@ -42,6 +51,9 @@ class Gcm {
   @OneToOne(() => Endereco)
   @JoinColumn({ name: 'endereco_id' })
   Enderecos: Endereco;
+
+  @Column()
+  avatar: string;
 
   @Column({ type: 'enum', enum: RegraEnum, default: RegraEnum.ADMINISTRATIVO })
   regra: string;
