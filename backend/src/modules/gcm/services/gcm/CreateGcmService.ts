@@ -47,7 +47,7 @@ class CreateCgmService {
     //* -> hash password
     const hashedSenha = await this.hashProvider.generateHash(senha);
 
-    // todo -> implement defaul profile pic
+    // todo -> implement default profile pic
 
     //* -> save on db
     const gcm = this.gcmsRepository.create({

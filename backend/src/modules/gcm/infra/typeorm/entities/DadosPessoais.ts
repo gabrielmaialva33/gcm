@@ -20,10 +20,10 @@ class DadosPessoais {
   cpf: string;
 
   @Column()
-  telefone: string[];
+  telefone: string;
 
   @Column()
-  celular: string[];
+  celular: string;
 
   @Column()
   nome_mae: string;
@@ -53,7 +53,7 @@ class DadosPessoais {
   estado_civil: string;
 
   @Column()
-  profissao: string[];
+  profissao: string;
 
   @Column()
   escolaridade: string;
@@ -62,7 +62,7 @@ class DadosPessoais {
   nome_conjulge: string;
 
   @Column()
-  nome_filhos: string[];
+  nome_filhos: string;
 
   @Column()
   titulo_eleitor: string;

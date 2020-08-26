@@ -63,7 +63,7 @@ export default class CreateGcms1598276533245 implements MigrationInterface {
           {
             name: 'avatar',
             type: 'varchar',
-            default: 'default.png',
+            isNullable: true,
           },
           {
             name: 'created_at',
