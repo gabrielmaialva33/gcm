@@ -3,7 +3,6 @@ import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
 import Gcm from '@modules/gcm/infra/typeorm/entities/Gcm';
-import IDadosPessoaisRepository from '@modules/gcm/repositories/IDadosPessoaisRepository';
 import IHashProvider from '@modules/gcm/providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
@@ -21,9 +20,6 @@ class CreateCgmService {
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
-
-    @inject('DadosPessoaisRepository')
-    private dadosPessoaisRepository: IDadosPessoaisRepository,
   ) {}
 
   public async execute({
