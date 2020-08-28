@@ -9,7 +9,7 @@ import {
 import DadosPessoais from './DadosPessoais';
 import Endereco from './Endereco';
 
-export enum RegraEnum {
+export enum Cargo {
   'COMANDANTE',
   'SUB_COMANDANTE',
   'ADMINISTRATIVO',
@@ -30,15 +30,6 @@ class Gcm {
   nome_guerra: string;
 
   @Column()
-  nome_usuario: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  senha: string;
-
-  @Column()
   dados_pessoais_id: string;
 
   @OneToOne(() => DadosPessoais)
@@ -52,10 +43,7 @@ class Gcm {
   @JoinColumn({ name: 'endereco_id' })
   Enderecos: Endereco;
 
-  @Column()
-  avatar: string;
-
-  @Column({ type: 'enum', enum: RegraEnum, default: RegraEnum.ADMINISTRATIVO })
+  @Column({ type: 'enum', enum: Cargo, default: Cargo.ADMINISTRATIVO })
   regra: string;
 }
 

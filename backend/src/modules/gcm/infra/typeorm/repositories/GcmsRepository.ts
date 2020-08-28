@@ -12,12 +12,8 @@ class GcmsRepository implements IGcmsRepository {
   }
 
   //* ->  create on db
-  public async create({
-    nome_guerra,
-    senha,
-    avatar,
-  }: ICreateGcmsDTO): Promise<Gcm> {
-    const gcm = this.ormRepository.create({ nome_guerra, senha, avatar });
+  public async create({ nome_guerra }: ICreateGcmsDTO): Promise<Gcm> {
+    const gcm = this.ormRepository.create({ nome_guerra });
     await this.ormRepository.save(gcm);
 
     return gcm;
@@ -35,24 +31,15 @@ class GcmsRepository implements IGcmsRepository {
     return gcm;
   }
 
+  public async findByNomeGuerra(nome_guerra: string): Promise<Gcm | undefined> {
+    const gcm = await this.ormRepository.findOne({ where: { nome_guerra } });
+    return gcm;
+  }
+
   public async finkByMatricula(
     matricula_gcm: number,
   ): Promise<Gcm | undefined> {
     const gcm = await this.ormRepository.findOne({ where: { matricula_gcm } });
-    return gcm;
-  }
-
-  public async findByEmail(email: string): Promise<Gcm | undefined> {
-    const gcm = await this.ormRepository.findOne({ where: { email } });
-
-    return gcm;
-  }
-
-  public async findByNomeUsuario(
-    nome_usuario: string,
-  ): Promise<Gcm | undefined> {
-    const gcm = await this.ormRepository.findOne({ where: { nome_usuario } });
-
     return gcm;
   }
 }

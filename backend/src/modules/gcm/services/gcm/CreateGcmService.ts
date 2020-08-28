@@ -3,13 +3,9 @@ import { inject, injectable } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
 import Gcm from '@modules/gcm/infra/typeorm/entities/Gcm';
-import IHashProvider from '@modules/gcm/providers/HashProvider/models/IHashProvider';
 
 interface IRequest {
   nome_guerra: string;
-  nome_usuario: string;
-  email: string;
-  senha: string;
 }
 
 @injectable()
@@ -17,40 +13,20 @@ class CreateCgmService {
   constructor(
     @inject('GcmsRepository')
     private gcmsRepository: IGcmsRepository,
-
-    @inject('HashProvider')
-    private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({
-    nome_guerra,
-    nome_usuario,
-    email,
-    senha,
-  }: IRequest): Promise<Gcm> {
+  public async execute({ nome_guerra }: IRequest): Promise<Gcm> {
     //* -> checker exists
-    const novoEmail = await this.gcmsRepository.findByEmail(email);
-    if (novoEmail) {
-      throw new AppError('E-mail já cadastrado.', 409);
-    }
-    const nomeUsuario = await this.gcmsRepository.findByNomeUsuario(
-      nome_usuario,
+    const nomeGuerraExists = await this.gcmsRepository.findByNomeGuerra(
+      nome_guerra,
     );
-    if (nomeUsuario) {
-      throw new AppError('Nome de usuário já cadastrado.', 409);
+    if (nomeGuerraExists) {
+      throw new AppError('Nome de guerra já cadastrado.', 409);
     }
-
-    //* -> hash password
-    const hashedSenha = await this.hashProvider.generateHash(senha);
-
-    // todo -> implement default profile pic
 
     //* -> save on db
     const gcm = this.gcmsRepository.create({
       nome_guerra,
-      nome_usuario,
-      email,
-      senha: hashedSenha,
     });
 
     return gcm;

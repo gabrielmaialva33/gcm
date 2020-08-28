@@ -23,10 +23,12 @@ export default class CreateDadosPessoais1598276510035
           {
             name: 'rg',
             type: 'varchar(15)',
+            isUnique: true,
           },
           {
             name: 'cpf',
             type: 'varchar(15)',
+            isUnique: true,
           },
           {
             name: 'telefone',
@@ -102,6 +104,7 @@ export default class CreateDadosPessoais1598276510035
             name: 'titulo_eleitor',
             type: 'varchar(15)',
             isNullable: true,
+            isUnique: true,
           },
           {
             name: 'zona_eleitoral',
@@ -112,6 +115,7 @@ export default class CreateDadosPessoais1598276510035
             name: 'cnh',
             type: 'varchar(15)',
             isNullable: true,
+            isUnique: true,
           },
           {
             name: 'validade_cnh',

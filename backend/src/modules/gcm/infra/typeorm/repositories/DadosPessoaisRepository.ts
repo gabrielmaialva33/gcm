@@ -77,6 +77,34 @@ class DadosPessoaisRepository implements IDadosPessoaisRepository {
 
     return dadosPessoais;
   }
+
+  public async findByRg(rg: string): Promise<DadosPessoais | undefined> {
+    const dadosPessoais = await this.ormRepository.findOne({ where: { rg } });
+
+    return dadosPessoais;
+  }
+
+  public async findByCpf(cpf: string): Promise<DadosPessoais | undefined> {
+    const dadosPessoais = await this.ormRepository.findOne({ where: { cpf } });
+
+    return dadosPessoais;
+  }
+
+  public async findByTituloEleitor(
+    titulo_eleitor: string,
+  ): Promise<DadosPessoais | undefined> {
+    const dadosPessoais = await this.ormRepository.findOne({
+      where: { titulo_eleitor },
+    });
+
+    return dadosPessoais;
+  }
+
+  public async findByCnh(cnh: string): Promise<DadosPessoais | undefined> {
+    const dadosPessoais = await this.ormRepository.findOne({ where: { cnh } });
+
+    return dadosPessoais;
+  }
 }
 
 export default DadosPessoaisRepository;
