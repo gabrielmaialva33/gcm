@@ -5,7 +5,7 @@ import User from '@modules/gcm/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 
 @injectable()
-class DetroyUserService {
+class DestroyUserService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -29,4 +29,4 @@ class DetroyUserService {
   }
 }
 
-export default DetroyUserService;
+export default DestroyUserService;

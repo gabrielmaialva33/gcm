@@ -34,13 +34,13 @@ export default class CreateUsers1598581135920 implements MigrationInterface {
             enum: ['admin', 'master', 'membro'],
           },
           {
+            name: 'gcm_id',
+            type: 'uuid',
+          },
+          {
             name: 'avatar',
             type: 'varchar',
             isNullable: true,
-          },
-          {
-            name: 'gcm_id',
-            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -56,9 +56,9 @@ export default class CreateUsers1598581135920 implements MigrationInterface {
       }),
     );
 
-    //* - foreignkey gcms
+    //* -> foreignkey gcms
     await queryRunner.createForeignKey(
-      'users',
+      'gcms',
       new TableForeignKey({
         name: 'gcm_fk',
         columnNames: ['gcm_id'],

@@ -45,6 +45,9 @@ class Gcm {
 
   @Column({ type: 'enum', enum: Cargo, default: Cargo.ADMINISTRATIVO })
   regra: string;
+
+  @Column({ type: 'text' })
+  historico: string;
 }
 
 export default Gcm;

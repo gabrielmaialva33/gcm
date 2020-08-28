@@ -49,6 +49,10 @@ export default class CreateGcms1598276533245 implements MigrationInterface {
             ],
           },
           {
+            name: 'historico',
+            type: 'text[]',
+          },
+          {
             name: 'created_at',
             type: ' timestamp with time zone',
             default: 'now()',
@@ -62,7 +66,7 @@ export default class CreateGcms1598276533245 implements MigrationInterface {
       }),
     );
 
-    //* - foreignkey dados_pessoais
+    //* -> foreignkey dados_pessoais
     await queryRunner.createForeignKey(
       'gcms',
       new TableForeignKey({
@@ -75,7 +79,7 @@ export default class CreateGcms1598276533245 implements MigrationInterface {
       }),
     );
 
-    //* - foreignkey enderecos
+    //* -> foreignkey enderecos
     await queryRunner.createForeignKey(
       'gcms',
       new TableForeignKey({
