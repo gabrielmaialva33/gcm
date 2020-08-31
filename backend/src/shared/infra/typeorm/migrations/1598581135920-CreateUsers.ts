@@ -58,7 +58,7 @@ export default class CreateUsers1598581135920 implements MigrationInterface {
 
     //* -> foreignkey gcms
     await queryRunner.createForeignKey(
-      'gcms',
+      'users',
       new TableForeignKey({
         name: 'gcm_fk',
         columnNames: ['gcm_id'],

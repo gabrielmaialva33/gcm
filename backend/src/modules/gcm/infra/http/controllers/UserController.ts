@@ -5,8 +5,20 @@ import { classToClass } from 'class-transformer';
 import CreateUserService from '@modules/gcm/services/user/CreateUserService';
 import UpdateUserService from '@modules/gcm/services/user/UpdateUserService';
 import DestroyUserService from '@modules/gcm/services/user/DestroyUserService';
+import ShowUserService from '@modules/gcm/services/user/ShowUserService';
 
 class UserControllers {
+  //* -> show execute
+  public async show(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+
+    const showUser = container.resolve(ShowUserService);
+
+    const user = await showUser.execute(user_id);
+
+    return response.json(classToClass(user));
+  }
+
   //* -> create execute
   public async create(request: Request, response: Response): Promise<Response> {
     const { nome_usuario, email, senha } = request.body;
@@ -45,4 +57,4 @@ class UserControllers {
   }
 }
 
-export default UserControllers;
+export default new UserControllers();

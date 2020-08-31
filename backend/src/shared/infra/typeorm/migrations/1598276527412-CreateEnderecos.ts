@@ -47,6 +47,11 @@ export default class CreateEnderecos1598276527412
             isNullable: true,
           },
           {
+            name: 'codigo',
+            type: 'varchar(3)',
+            isNullable: true,
+          },
+          {
             name: 'created_at',
             type: ' timestamp with time zone',
             default: 'now()',

@@ -20,6 +20,7 @@ class EnderecosRepository implements IEnderecosRepository {
     estado,
     cidade,
     cep,
+    codigo,
   }: ICreateEnderecosDTO): Promise<Endereco> {
     const endereco = this.ormRepository.create({
       logradouro,
@@ -29,6 +30,7 @@ class EnderecosRepository implements IEnderecosRepository {
       estado,
       cidade,
       cep,
+      codigo,
     });
 
     await this.ormRepository.save(endereco);

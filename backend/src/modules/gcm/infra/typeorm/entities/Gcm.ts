@@ -9,7 +9,7 @@ import {
 import DadosPessoais from './DadosPessoais';
 import Endereco from './Endereco';
 
-export enum Cargo {
+export enum Atribuicao {
   'COMANDANTE',
   'SUB_COMANDANTE',
   'ADMINISTRATIVO',
@@ -43,8 +43,12 @@ class Gcm {
   @JoinColumn({ name: 'endereco_id' })
   Enderecos: Endereco;
 
-  @Column({ type: 'enum', enum: Cargo, default: Cargo.ADMINISTRATIVO })
-  regra: string;
+  @Column({
+    type: 'enum',
+    enum: Atribuicao,
+    default: Atribuicao.ADMINISTRATIVO,
+  })
+  atribuicao: string;
 
   @Column({ type: 'text' })
   historico: string;

@@ -123,6 +123,10 @@ export default class CreateDadosPessoais1598276510035
             isNullable: true,
           },
           {
+            name: 'observacao',
+            type: 'text',
+          },
+          {
             name: 'created_at',
             type: ' timestamp with time zone',
             default: 'now()',

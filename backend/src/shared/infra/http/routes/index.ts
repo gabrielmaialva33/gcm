@@ -1,9 +1,10 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+
+import usersRouter from '@modules/gcm/infra/http/routes/users.routes';
 
 const routes = Router();
 
-routes.get('/', (request: Request, response: Response) => {
-  return response.json({ msg: 'test' });
-});
+//* -> GCM
+routes.use('/users', usersRouter);
 
 export default routes;

@@ -36,7 +36,7 @@ export default class CreateGcms1598276533245 implements MigrationInterface {
             type: 'varchar(15)',
           },
           {
-            name: 'cardo',
+            name: 'atribuicao',
             type: 'enum',
             default: "'administrativo'",
             enum: [
@@ -50,7 +50,12 @@ export default class CreateGcms1598276533245 implements MigrationInterface {
           },
           {
             name: 'historico',
-            type: 'text[]',
+            type: 'varchar(200)[]',
+            isNullable: true,
+          },
+          {
+            name: 'status',
+            type: 'varchar(20)',
           },
           {
             name: 'created_at',

@@ -6,4 +6,5 @@ export default interface ICreateEnderecosDTO {
   cidade: string;
   estado: string;
   cep: string;
+  codigo: string;
 }

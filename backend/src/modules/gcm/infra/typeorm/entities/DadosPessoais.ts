@@ -76,6 +76,9 @@ class DadosPessoais {
   @Column({ type: 'date' })
   validade_cnh: Date;
 
+  @Column({ type: 'text' })
+  observacao: string;
+
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   created_at: Date;
 
