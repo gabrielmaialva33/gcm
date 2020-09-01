@@ -28,7 +28,7 @@ class User {
   @Column()
   senha: string;
 
-  @Column({ type: 'enum', enum: Regra, default: Regra.membro })
+  @Column({ type: 'enum', enum: Regra, default: Regra.admin })
   regra: string;
 
   @Column()

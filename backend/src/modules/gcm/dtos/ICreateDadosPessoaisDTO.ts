@@ -21,4 +21,5 @@ export default interface ICreateDadosPessoaisDTO {
   zona_eleitoral?: string;
   cnh?: string;
   validade_cnh?: Date;
+  observacao?: string;
 }

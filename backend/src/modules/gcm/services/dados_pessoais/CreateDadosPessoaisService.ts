@@ -27,6 +27,7 @@ interface IRequest {
   zona_eleitoral: string;
   cnh: string;
   validade_cnh: Date;
+  observacao: string;
 }
 
 @injectable()
@@ -59,6 +60,7 @@ class CreateDadosPessoaisService {
     zona_eleitoral,
     cnh,
     validade_cnh,
+    observacao,
   }: IRequest): Promise<DadosPessoais> {
     //* -> checker exists
     const rgExists = await this.dadosPessoaisRepository.findByRg(rg);
@@ -104,6 +106,7 @@ class CreateDadosPessoaisService {
       zona_eleitoral,
       cnh,
       validade_cnh,
+      observacao,
     });
 
     return dadosPessoais;

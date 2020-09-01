@@ -6,6 +6,8 @@ import Gcm from '@modules/gcm/infra/typeorm/entities/Gcm';
 
 interface IRequest {
   nome_guerra: string;
+  dados_pessoais_id: string;
+  endereco_id: string;
 }
 
 @injectable()
@@ -15,7 +17,11 @@ class CreateCgmService {
     private gcmsRepository: IGcmsRepository,
   ) {}
 
-  public async execute({ nome_guerra }: IRequest): Promise<Gcm> {
+  public async execute({
+    nome_guerra,
+    dados_pessoais_id,
+    endereco_id,
+  }: IRequest): Promise<Gcm> {
     //* -> checker exists
     const nomeGuerraExists = await this.gcmsRepository.findByNomeGuerra(
       nome_guerra,
@@ -27,6 +33,8 @@ class CreateCgmService {
     //* -> save on db
     const gcm = this.gcmsRepository.create({
       nome_guerra,
+      dados_pessoais_id,
+      endereco_id,
     });
 
     return gcm;

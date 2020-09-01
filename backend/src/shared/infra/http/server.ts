@@ -34,5 +34,5 @@ app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
 
 app.listen(process.env.HTTP_PORT || 3333, () => {
   // eslint-disable-next-line no-console
-  console.log(` 🚀 Servidor iniciado. `);
+  console.log(`🚀  Servidor iniciado. `);
 });

@@ -12,8 +12,16 @@ class GcmsRepository implements IGcmsRepository {
   }
 
   //* ->  create on db
-  public async create({ nome_guerra }: ICreateGcmsDTO): Promise<Gcm> {
-    const gcm = this.ormRepository.create({ nome_guerra });
+  public async create({
+    nome_guerra,
+    dados_pessoais_id,
+    endereco_id,
+  }: ICreateGcmsDTO): Promise<Gcm> {
+    const gcm = this.ormRepository.create({
+      nome_guerra,
+      dados_pessoais_id,
+      endereco_id,
+    });
     await this.ormRepository.save(gcm);
 
     return gcm;
