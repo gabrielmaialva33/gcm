@@ -18,7 +18,7 @@ export enum Atribuicao {
   'OFICIAL',
 }
 
-@Entity()
+@Entity('gcms')
 class Gcm {
   @PrimaryGeneratedColumn('uuid')
   id: string;
