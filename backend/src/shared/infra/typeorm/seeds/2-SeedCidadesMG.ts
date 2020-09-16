@@ -5,7 +5,7 @@ import XLSX from 'xlsx';
 import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
 import Estado from '@modules/endereco/infra/typeorm/entities/Estado';
 
-export default class CreateSeedCidadesSP implements Seeder {
+export default class SeedCidadesSP implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
     //* -> get estado_id
     const estadoRepo = getRepository(Estado);

@@ -7,26 +7,26 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import Bairro from './Bairro';
+import Bairro from '@modules/endereco/infra/typeorm/entities/Bairro';
 
-Entity('enderecos');
+@Entity('enderecos')
 class Endereco {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 150 })
   logradouro: string;
 
-  @Column({ type: 'varchar', length: 4 })
+  @Column({ type: 'varchar', length: 4, nullable: true })
   numero: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 200, nullable: true })
   complemento: string;
 
   @Column({ type: 'varchar', length: 15 })
   cep: string;
 
-  @Column({ type: 'varchar', length: 6 })
+  @Column({ type: 'varchar', length: 6, nullable: true })
   codigo_endereco: string;
 
   @Column({ type: 'uuid' })

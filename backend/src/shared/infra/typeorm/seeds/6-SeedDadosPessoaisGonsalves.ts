@@ -4,11 +4,11 @@ import { Connection, getRepository } from 'typeorm';
 import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
 import DadosPessoais from '@modules/gcm/infra/typeorm/entities/DadosPessoais';
 
-export default class CreateSeedGcmGonsalves implements Seeder {
+export default class SeedDadosPessoaisGonsalves implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
     const cidadeRepo = getRepository(Cidade);
 
-    const municipio_nascimento_id = await cidadeRepo
+    const municipio = await cidadeRepo
       .findOne({
         where: { codigo_ibge: '3113503', municipio: 'Carbonita' },
       })
@@ -18,7 +18,7 @@ export default class CreateSeedGcmGonsalves implements Seeder {
       });
 
     //* -> check estado exists
-    if (!municipio_nascimento_id) {
+    if (!municipio) {
       throw new Error('Municipio não encontrado');
     }
 
@@ -36,7 +36,7 @@ export default class CreateSeedGcmGonsalves implements Seeder {
         nome_mae: 'José Gonçalves Rosa',
         nome_pai: 'Sebastiana Rosa dos Santos',
         data_nascimento: '130871',
-        municipio_nascimento_id: municipio_nascimento_id.id,
+        municipio_nascimento_id: municipio.id,
         sexo: 'masculino',
         tipo_sanguineo: 'O+',
         estado_civil: 'casado',

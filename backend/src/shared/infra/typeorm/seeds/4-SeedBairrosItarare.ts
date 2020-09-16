@@ -3,35 +3,39 @@ import { Connection, getRepository } from 'typeorm';
 import XLSX from 'xlsx';
 
 import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
-import Estado from '@modules/endereco/infra/typeorm/entities/Estado';
+import Bairro from '@modules/endereco/infra/typeorm/entities/Bairro';
 
-export default class CreateSeedCidadesSP implements Seeder {
+export default class SeedBairrosItarare implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
-    //* -> get estado_id
-    const estadoRepo = getRepository(Estado);
+    //* -> get municipio_id
+    const cidadeRepo = getRepository(Cidade);
 
-    const estado = await estadoRepo
-      .findOne({ where: { codigo_ibge: '35' } })
+    const municipio = await cidadeRepo
+      .findOne({ where: { codigo_ibge: '3523206', municipio: 'Itararé' } })
       .catch(err => {
         // eslint-disable-next-line no-console
         console.log(` ❌  ${err.message}`);
       });
 
     //* -> check estado exists
-    if (!estado) {
+    if (!municipio) {
       throw new Error('Estado não encontrado');
     }
 
     //* -> xlsx to json
-    const file = XLSX.readFile(`${__dirname}/xlsx/seed_cidades_sp.xlsx`);
+    const file = XLSX.readFile(`${__dirname}/xlsx/seed_bairros_itarare.xlsx`);
 
-    //* -> looping estado_id
-    for (let i = 2; i <= 646; i += 1) {
-      XLSX.utils.sheet_add_json(file.Sheets.data, [{ estado_id: estado.id }], {
-        header: ['estado_id'],
-        skipHeader: true,
-        origin: `D${i}`,
-      });
+    //* -> looping municipio_id
+    for (let i = 2; i <= 86; i += 1) {
+      XLSX.utils.sheet_add_json(
+        file.Sheets.data,
+        [{ municipio_id: municipio.id }],
+        {
+          header: ['municipio_id'],
+          skipHeader: true,
+          origin: `D${i}`,
+        },
+      );
     }
 
     const sheet = file.SheetNames;
@@ -39,7 +43,7 @@ export default class CreateSeedCidadesSP implements Seeder {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Cidade)
+      .into(Bairro)
       .values(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]))
       .execute()
       .catch(err => {

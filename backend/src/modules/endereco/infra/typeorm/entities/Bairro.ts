@@ -6,6 +6,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
+
 import Cidade from './Cidade';
 
 @Entity('bairros')

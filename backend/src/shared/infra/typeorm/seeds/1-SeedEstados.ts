@@ -4,7 +4,7 @@ import XLSX from 'xlsx';
 
 import Estado from '@modules/endereco/infra/typeorm/entities/Estado';
 
-export default class CreateSeedEstados implements Seeder {
+export default class SeedEstados implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
     //* -> xlsx to json
     const file = XLSX.readFile(`${__dirname}/xlsx/seed_estado.xlsx`);

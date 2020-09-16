@@ -19,13 +19,13 @@ export default class CreateBairros1599248227641 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome',
-            type: 'varchar(100)',
-          },
-          {
             name: 'codigo_bairro',
             type: 'varchar(6)',
             isNullable: true,
+          },
+          {
+            name: 'nome',
+            type: 'varchar(100)',
           },
           {
             name: 'observacao',

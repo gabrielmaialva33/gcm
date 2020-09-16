@@ -21,7 +21,7 @@ export default class CreateEnderecos1600214918020
           },
           {
             name: 'logradouro',
-            type: 'varchar(100)',
+            type: 'varchar(150)',
           },
           {
             name: 'numero',
@@ -30,13 +30,12 @@ export default class CreateEnderecos1600214918020
           },
           {
             name: 'complemento',
-            type: 'varchar(100)',
+            type: 'varchar(200)',
             isNullable: true,
           },
           {
             name: 'cep',
             type: 'varchar(15)',
-            isNullable: true,
           },
           {
             name: 'codigo_endereco',
