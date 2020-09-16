@@ -7,6 +7,8 @@
   "database": "YOUR DATABASE",
   "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+  "seeds": ["./src/shared/infra/typeorm/seeds/*.ts"],
+  "factories": ["./src/shared/infra/typeorm/factories/*.ts"],
   "cli": {
     "migrationsDir": "./src/shared/infra/typeorm/migrations"
   }

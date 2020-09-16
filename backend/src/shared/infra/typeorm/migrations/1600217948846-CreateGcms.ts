@@ -5,7 +5,7 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateGcms1598276533245 implements MigrationInterface {
+export default class CreateGcms1600217948846 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({

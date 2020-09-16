@@ -1,11 +1,15 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export default class CreateEnderecos1598276527412
-  implements MigrationInterface {
+export default class CreateBairros1599248227641 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'enderecos',
+        name: 'bairros',
         columns: [
           {
             name: 'id',
@@ -15,41 +19,22 @@ export default class CreateEnderecos1598276527412
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'logradouro',
+            name: 'nome',
             type: 'varchar(100)',
           },
           {
-            name: 'numero',
-            type: 'int',
+            name: 'codigo_bairro',
+            type: 'varchar(6)',
             isNullable: true,
           },
           {
-            name: 'bairro',
-            type: 'varchar(50)',
+            name: 'observacao',
+            type: 'text',
             isNullable: true,
           },
           {
-            name: 'complemento',
-            type: 'varchar(20)',
-            isNullable: true,
-          },
-          {
-            name: 'cidade',
-            type: 'varchar(40)',
-          },
-          {
-            name: 'estado',
-            type: 'varchar(2)',
-          },
-          {
-            name: 'cep',
-            type: 'varchar(15)',
-            isNullable: true,
-          },
-          {
-            name: 'codigo',
-            type: 'varchar(3)',
-            isNullable: true,
+            name: 'municipio_id',
+            type: 'uuid',
           },
           {
             name: 'created_at',
@@ -64,9 +49,23 @@ export default class CreateEnderecos1598276527412
         ],
       }),
     );
+
+    //* -> foreignkey estados
+    await queryRunner.createForeignKey(
+      'bairros',
+      new TableForeignKey({
+        name: 'municipio_fk',
+        columnNames: ['municipio_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'cidades',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('enderecos');
+    await queryRunner.dropForeignKey('bairros', 'municipio_fk');
+    await queryRunner.dropTable('bairros');
   }
 }

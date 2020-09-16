@@ -1,6 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export default class CreateDadosPessoais1598276510035
+export default class CreateDadosPessoais1600217942019
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     //* this ensure we can use default: `uuid_generate_v4()`
@@ -55,12 +60,8 @@ export default class CreateDadosPessoais1598276510035
           },
           //! warn
           {
-            name: 'local_nascimento',
-            type: 'varchar(40)',
-          },
-          {
-            name: 'estado_nascimento',
-            type: 'varchar(2)',
+            name: 'municipio_nascimento_id',
+            type: 'uuid',
           },
           {
             name: 'sexo',
@@ -139,9 +140,26 @@ export default class CreateDadosPessoais1598276510035
         ],
       }),
     );
+
+    //* -> foreignkey estados
+    await queryRunner.createForeignKey(
+      'dados_pessoais',
+      new TableForeignKey({
+        name: 'municipio_nascimento_fk',
+        columnNames: ['municipio_nascimento_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'cidades',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropForeignKey(
+      'dados_pessoais',
+      'municipio_nascimento_fk',
+    );
     await queryRunner.dropTable('dados_pessoais');
   }
 }
