@@ -19,7 +19,7 @@ export default class CreateSeedCidadesSP implements Seeder {
 
     //* -> check estado exists
     if (!estado) {
-      throw new Error('erro');
+      throw new Error('Estado não encontrado');
     }
 
     //* -> xlsx to json
@@ -41,6 +41,10 @@ export default class CreateSeedCidadesSP implements Seeder {
       .insert()
       .into(Cidade)
       .values(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]))
-      .execute();
+      .execute()
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(` ❌  ${err.message}`);
+      });
   }
 }

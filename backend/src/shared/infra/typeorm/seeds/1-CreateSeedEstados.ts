@@ -18,6 +18,10 @@ export default class CreateSeedEstados implements Seeder {
       .insert()
       .into(Estado)
       .values(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]))
-      .execute();
+      .execute()
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(` ❌  ${err.message}`);
+      });
   }
 }

@@ -38,13 +38,13 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
             enum: ['admin', 'master', 'membro'],
           },
           {
-            name: 'gcm_id',
-            type: 'uuid',
-          },
-          {
             name: 'avatar',
             type: 'varchar',
             isNullable: true,
+          },
+          {
+            name: 'gcm_id',
+            type: 'uuid',
           },
           {
             name: 'created_at',

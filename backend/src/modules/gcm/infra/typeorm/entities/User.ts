@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
 } from 'typeorm';
 
 import Gcm from './Gcm';
@@ -19,19 +20,19 @@ class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 15, unique: true })
   nome_usuario: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 30, unique: true })
   email: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 30 })
   senha: string;
 
   @Column({ type: 'enum', enum: Regra, default: Regra.admin })
   regra: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   avatar: string;
 
   @Column({ type: 'uuid' })
@@ -39,7 +40,13 @@ class User {
 
   @OneToOne(() => Gcm)
   @JoinColumn({ name: 'gcm_id' })
-  Gcm: Gcm;
+  gcm: Gcm;
+
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
+  created_at: Date;
+
+  @CreateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
+  updated_at: Date;
 }
 
 export default User;

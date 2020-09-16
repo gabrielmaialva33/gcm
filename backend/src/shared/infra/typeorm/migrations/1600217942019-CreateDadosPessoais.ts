@@ -58,7 +58,6 @@ export default class CreateDadosPessoais1600217942019
             name: 'data_nascimento',
             type: 'date',
           },
-          //! warn
           {
             name: 'municipio_nascimento_id',
             type: 'uuid',
@@ -67,6 +66,12 @@ export default class CreateDadosPessoais1600217942019
             name: 'sexo',
             type: 'varchar(10)',
           },
+          //! warn enum type
+          {
+            name: 'tipo_sanguineo',
+            type: 'varchar(2)',
+          },
+          //! warn enum type
           {
             name: 'estado_civil',
             type: 'varchar(11)',
@@ -75,6 +80,7 @@ export default class CreateDadosPessoais1600217942019
           {
             name: 'profissao',
             type: 'varchar(30)[]',
+            isNullable: true,
           },
           {
             name: 'escolaridade',
@@ -83,7 +89,7 @@ export default class CreateDadosPessoais1600217942019
           },
           {
             name: 'nome_conjulge',
-            type: 'varchar(10)',
+            type: 'varchar(20)',
             isNullable: true,
           },
           {
@@ -113,9 +119,15 @@ export default class CreateDadosPessoais1600217942019
             type: 'date',
             isNullable: true,
           },
+          //! warn enum type
+          {
+            name: 'tipo_cnh',
+            type: 'varchar(1)',
+          },
           {
             name: 'observacao',
             type: 'text',
+            isNullable: true,
           },
           {
             name: 'created_at',

@@ -33,7 +33,7 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
           },
           {
             name: 'nome_guerra',
-            type: 'varchar(15)',
+            type: 'varchar(20)',
           },
           {
             name: 'atribuicao',
@@ -53,6 +53,7 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
             type: 'varchar(200)[]',
             isNullable: true,
           },
+          //! warn enum type
           {
             name: 'status',
             type: 'varchar(20)',
