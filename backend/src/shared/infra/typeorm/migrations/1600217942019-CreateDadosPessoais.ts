@@ -68,16 +68,6 @@ export default class CreateDadosPessoais1600217942019
             type: 'varchar(10)',
           },
           {
-            name: 'nacionalidade',
-            type: 'varchar(15)',
-            isNullable: true,
-          },
-          {
-            name: 'naturalidade',
-            type: 'varchar(20)',
-            isNullable: true,
-          },
-          {
             name: 'estado_civil',
             type: 'varchar(11)',
             isNullable: true,
@@ -88,7 +78,7 @@ export default class CreateDadosPessoais1600217942019
           },
           {
             name: 'escolaridade',
-            type: 'varchar',
+            type: 'varchar(30)',
             isNullable: true,
           },
           {
@@ -98,7 +88,7 @@ export default class CreateDadosPessoais1600217942019
           },
           {
             name: 'nome_filhos',
-            type: 'varchar(20)[]',
+            type: 'varchar(40)[]',
             isNullable: true,
           },
           {
