@@ -25,12 +25,12 @@ export default class CreateEnderecos1600214918020
           },
           {
             name: 'numero',
-            type: 'int',
+            type: 'varchar(4)',
             isNullable: true,
           },
           {
             name: 'complemento',
-            type: 'varchar(50)',
+            type: 'varchar(100)',
             isNullable: true,
           },
           {

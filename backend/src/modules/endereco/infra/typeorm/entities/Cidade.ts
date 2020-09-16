@@ -14,16 +14,16 @@ class Cidade {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 7 })
   codigo_ibge: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 50 })
   municipio: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100 })
   gentilico: string;
 
-  @Column()
+  @Column({ type: 'uuid' })
   estado_id: string;
 
   @OneToOne(() => Estado)
