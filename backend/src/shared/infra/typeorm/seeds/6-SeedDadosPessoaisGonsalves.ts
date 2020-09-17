@@ -19,7 +19,7 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
 
     //* -> check estado exists
     if (!municipio) {
-      throw new Error('Municipio não encontrado');
+      throw new Error(' ❌ Municipio não encontrado');
     }
 
     //* inser values on dados_pessoais

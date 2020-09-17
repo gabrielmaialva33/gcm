@@ -19,7 +19,7 @@ export default class SeedBairrosItarare implements Seeder {
 
     //* -> check estado exists
     if (!municipio) {
-      throw new Error('Estado não encontrado');
+      throw new Error(' ❌ Estado não encontrado');
     }
 
     //* -> xlsx to json

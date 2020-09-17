@@ -51,12 +51,12 @@ class Gcm {
   })
   atribuicao: string;
 
-  @Column({ type: 'text', nullable: true })
-  historico: string;
+  @Column({ type: 'varchar', nullable: true })
+  historico: string[];
 
   //! warn enum type
-  @Column({ type: 'varchar', length: 20 })
-  status: string;
+  @Column({ type: 'boolean', default: true })
+  status: boolean;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   created_at: Date;

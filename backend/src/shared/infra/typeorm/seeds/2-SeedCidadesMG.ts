@@ -19,7 +19,7 @@ export default class SeedCidadesSP implements Seeder {
 
     //* -> check estado exists
     if (!estado) {
-      throw new Error('Estado não encontrado');
+      throw new Error(' ❌ Estado não encontrado');
     }
 
     //* -> xlsx to json

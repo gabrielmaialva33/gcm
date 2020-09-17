@@ -18,7 +18,7 @@ export default class SeedEnderecoGonsalves implements Seeder {
       });
 
     if (!bairro) {
-      throw new Error('Bairro não encontrado');
+      throw new Error(' ❌ Bairro não encontrado');
     }
 
     await connection
@@ -33,6 +33,10 @@ export default class SeedEnderecoGonsalves implements Seeder {
         codigo_endereco: '',
         bairro_id: bairro.id,
       })
-      .execute();
+      .execute()
+      .catch(err => {
+        // eslint-disable-next-line no-console
+        console.log(` ❌  ${err.message}`);
+      });
   }
 }

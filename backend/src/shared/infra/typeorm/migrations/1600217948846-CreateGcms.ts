@@ -21,6 +21,7 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
           {
             name: 'matricula_gcm',
             type: 'int',
+            isGenerated: true,
             generationStrategy: 'increment',
           },
           {
@@ -56,7 +57,8 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
           //! warn enum type
           {
             name: 'status',
-            type: 'varchar(20)',
+            type: 'boolean',
+            default: true,
           },
           {
             name: 'created_at',
