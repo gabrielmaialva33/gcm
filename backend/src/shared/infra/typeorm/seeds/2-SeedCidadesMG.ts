@@ -2,7 +2,7 @@ import { Seeder, Factory } from 'typeorm-seeding';
 import { Connection, getRepository } from 'typeorm';
 import XLSX from 'xlsx';
 
-import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
+import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
 import Estado from '@modules/endereco/infra/typeorm/entities/Estado';
 
 export default class SeedCidadesSP implements Seeder {
@@ -39,7 +39,7 @@ export default class SeedCidadesSP implements Seeder {
     await connection
       .createQueryBuilder()
       .insert()
-      .into(Cidade)
+      .into(Municipio)
       .values(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]))
       .execute()
       .catch(err => {

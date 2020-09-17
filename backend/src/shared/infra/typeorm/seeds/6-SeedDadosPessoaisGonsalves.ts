@@ -1,12 +1,12 @@
 import { Seeder, Factory } from 'typeorm-seeding';
 import { Connection, getRepository } from 'typeorm';
 
-import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
+import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
 import DadosPessoais from '@modules/gcm/infra/typeorm/entities/DadosPessoais';
 
 export default class SeedDadosPessoaisGonsalves implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
-    const cidadeRepo = getRepository(Cidade);
+    const cidadeRepo = getRepository(Municipio);
 
     const municipio = await cidadeRepo
       .findOne({
@@ -31,23 +31,23 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
         nome: 'Sebastião Ademar Gonçalves',
         rg: '377953611',
         cpf: '72042940682',
-        telefone: '1535314445',
-        celular: '15996962874',
+        telefone: ['1535314445'],
+        celular: ['15996962874'],
         nome_mae: 'José Gonçalves Rosa',
         nome_pai: 'Sebastiana Rosa dos Santos',
-        data_nascimento: '130871',
+        data_nascimento: '08-13-1971',
         municipio_nascimento_id: municipio.id,
         sexo: 'masculino',
         tipo_sanguineo: 'O+',
         estado_civil: 'casado',
-        profissao: '',
+        profissao: [''],
         escolaridade: '2º	Grau Completo',
         nome_conjulge: '',
         nome_filhos: ['Vitoria Caroline Gonçalves', 'Julia Gonçalves'],
         titulo_eleitor: '101811660272',
         zona_eleitoral: '057011',
         cnh: '02737170006',
-        validade_cnh: '05042020',
+        validade_cnh: '04-05-2020',
         tipo_cnh: 'C',
         observacao: '',
       })

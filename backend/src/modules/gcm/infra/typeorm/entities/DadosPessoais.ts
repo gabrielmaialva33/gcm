@@ -7,7 +7,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
+import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
 
 @Entity('dados_pessoais')
 class DadosPessoais {
@@ -24,10 +24,10 @@ class DadosPessoais {
   cpf: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
-  telefone: string;
+  telefone: string[];
 
   @Column({ type: 'varchar', length: 20, nullable: true })
-  celular: string;
+  celular: string[];
 
   @Column({ type: 'varchar', length: 40 })
   nome_mae: string;
@@ -41,9 +41,9 @@ class DadosPessoais {
   @Column({ type: 'uuid' })
   municipio_nascimento_id: string;
 
-  @OneToOne(() => Cidade)
+  @OneToOne(() => Municipio)
   @JoinColumn({ name: 'municipio_nascimento_id' })
-  municipio_nascimento: Cidade;
+  municipio_nascimento: Municipio;
 
   @Column({ type: 'varchar', length: 10 })
   sexo: string;
@@ -57,7 +57,7 @@ class DadosPessoais {
   estado_civil: string;
 
   @Column({ type: 'varchar', length: 30, nullable: true })
-  profissao: string;
+  profissao: string[];
 
   @Column({ type: 'varchar', length: 30, nullable: true })
   escolaridade: string;

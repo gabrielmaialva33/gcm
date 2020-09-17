@@ -7,7 +7,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import Cidade from './Cidade';
+import Municipio from './Municipio';
 
 @Entity('bairros')
 class Bairro {
@@ -24,11 +24,11 @@ class Bairro {
   observacao: string;
 
   @Column({ type: 'uuid' })
-  cidade_id: string;
+  municipio_id: string;
 
-  @OneToOne(() => Cidade)
-  @JoinColumn({ name: 'cidade_id' })
-  cidade: Cidade;
+  @OneToOne(() => Municipio)
+  @JoinColumn({ name: 'municipio_id' })
+  municipio: Municipio;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
   created_at: Date;

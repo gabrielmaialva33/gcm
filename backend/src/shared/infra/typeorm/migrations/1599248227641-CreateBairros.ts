@@ -57,7 +57,7 @@ export default class CreateBairros1599248227641 implements MigrationInterface {
         name: 'municipio_fk',
         columnNames: ['municipio_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'cidades',
+        referencedTableName: 'municipios',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),

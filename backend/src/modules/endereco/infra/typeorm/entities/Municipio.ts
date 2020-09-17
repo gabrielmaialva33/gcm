@@ -9,8 +9,8 @@ import {
 
 import Estado from '@modules/endereco/infra/typeorm/entities/Estado';
 
-@Entity('cidades')
-class Cidade {
+@Entity('municipios')
+class Municipio {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -37,4 +37,4 @@ class Cidade {
   updated_at: Date;
 }
 
-export default Cidade;
+export default Municipio;

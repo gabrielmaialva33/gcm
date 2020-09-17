@@ -2,13 +2,13 @@ import { Seeder, Factory } from 'typeorm-seeding';
 import { Connection, getRepository } from 'typeorm';
 import XLSX from 'xlsx';
 
-import Cidade from '@modules/endereco/infra/typeorm/entities/Cidade';
+import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
 import Bairro from '@modules/endereco/infra/typeorm/entities/Bairro';
 
 export default class SeedBairrosItarare implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
     //* -> get municipio_id
-    const cidadeRepo = getRepository(Cidade);
+    const cidadeRepo = getRepository(Municipio);
 
     const municipio = await cidadeRepo
       .findOne({ where: { codigo_ibge: '3523206', municipio: 'Itararé' } })
@@ -33,12 +33,14 @@ export default class SeedBairrosItarare implements Seeder {
         {
           header: ['municipio_id'],
           skipHeader: true,
-          origin: `D${i}`,
+          origin: `C${i}`,
         },
       );
     }
 
     const sheet = file.SheetNames;
+
+    // console.log(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]));
 
     await connection
       .createQueryBuilder()

@@ -150,7 +150,7 @@ export default class CreateDadosPessoais1600217942019
         name: 'municipio_nascimento_fk',
         columnNames: ['municipio_nascimento_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'cidades',
+        referencedTableName: 'municipios',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
