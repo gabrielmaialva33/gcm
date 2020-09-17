@@ -6,9 +6,9 @@ import DadosPessoais from '@modules/gcm/infra/typeorm/entities/DadosPessoais';
 
 export default class SeedDadosPessoaisGonsalves implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
-    const cidadeRepo = getRepository(Municipio);
+    const municipioRepo = getRepository(Municipio);
 
-    const municipio = await cidadeRepo
+    const municipio = await municipioRepo
       .findOne({
         where: { codigo_ibge: '3113503', municipio: 'Carbonita' },
       })
