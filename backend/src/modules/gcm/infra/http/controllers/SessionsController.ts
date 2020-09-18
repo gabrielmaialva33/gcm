@@ -6,12 +6,11 @@ import AuthenticateUserService from '@modules/gcm/services/user/AuthenticateUser
 
 class SessionsController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { email, nome_usuario, senha } = request.body;
+    const { nome_usuario, senha } = request.body;
 
     const authenticateUser = container.resolve(AuthenticateUserService);
 
     const { user, token } = await authenticateUser.execute({
-      email,
       nome_usuario,
       senha,
     });
