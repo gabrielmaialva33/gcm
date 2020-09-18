@@ -21,11 +21,9 @@ class DadosPessoaisRepository implements IDadosPessoaisRepository {
     nome_mae,
     nome_pai,
     data_nascimento,
-    local_nascimento,
-    estado_nascimento,
+    municipio_nascimento_id,
     sexo,
-    nacionalidade,
-    naturalidade,
+    tipo_sanguineo,
     estado_civil,
     profissao,
     escolaridade,
@@ -35,6 +33,8 @@ class DadosPessoaisRepository implements IDadosPessoaisRepository {
     zona_eleitoral,
     cnh,
     validade_cnh,
+    tipo_cnh,
+    observacao,
   }: ICreateDadosPessoaisDTO): Promise<DadosPessoais> {
     const dadosPessoais = this.ormRepository.create({
       nome,
@@ -45,11 +45,9 @@ class DadosPessoaisRepository implements IDadosPessoaisRepository {
       nome_mae,
       nome_pai,
       data_nascimento,
-      local_nascimento,
-      estado_nascimento,
+      municipio_nascimento_id,
       sexo,
-      nacionalidade,
-      naturalidade,
+      tipo_sanguineo,
       estado_civil,
       profissao,
       escolaridade,
@@ -59,6 +57,8 @@ class DadosPessoaisRepository implements IDadosPessoaisRepository {
       zona_eleitoral,
       cnh,
       validade_cnh,
+      tipo_cnh,
+      observacao,
     });
 
     await this.ormRepository.save(dadosPessoais);

@@ -123,6 +123,7 @@ export default class CreateDadosPessoais1600217942019
           {
             name: 'tipo_cnh',
             type: 'varchar(1)',
+            isNullable: true,
           },
           {
             name: 'observacao',

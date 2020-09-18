@@ -80,7 +80,8 @@ class DadosPessoais {
   @Column({ type: 'date', nullable: true })
   validade_cnh: Date;
 
-  @Column({ type: 'varchar', length: 1 })
+  //! warn enun type
+  @Column({ type: 'varchar', length: 1, nullable: true })
   tipo_cnh: string;
 
   @Column({ type: 'text', nullable: true })
