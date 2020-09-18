@@ -26,7 +26,7 @@ class User {
   @Column({ type: 'varchar', length: 30, unique: true })
   email: string;
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ type: 'varchar' })
   senha: string;
 
   @Column({ type: 'enum', enum: Regra, default: Regra.admin })

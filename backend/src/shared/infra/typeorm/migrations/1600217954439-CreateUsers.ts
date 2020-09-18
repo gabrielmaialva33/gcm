@@ -29,7 +29,7 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
           },
           {
             name: 'senha',
-            type: 'varchar(30)',
+            type: 'varchar',
           },
           {
             name: 'regra',
