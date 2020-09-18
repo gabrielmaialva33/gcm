@@ -1,10 +1,8 @@
 export default interface ICreateEnderecosDTO {
   logradouro: string;
-  numero?: number;
-  bairro?: string;
+  numero?: string;
   complemento?: string;
-  cidade: string;
-  estado: string;
   cep: string;
-  codigo: string;
+  codigo_endereco?: string;
+  bairro_id: string;
 }

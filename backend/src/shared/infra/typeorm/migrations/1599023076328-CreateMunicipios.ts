@@ -22,6 +22,7 @@ export default class CreateMunicipios1599023076328
           {
             name: 'codigo_ibge',
             type: 'varchar(7)',
+            isNullable: true,
           },
           {
             name: 'municipio',
@@ -30,6 +31,7 @@ export default class CreateMunicipios1599023076328
           {
             name: 'gentilico',
             type: 'varchar(100)',
+            isNullable: true,
           },
           {
             name: 'estado_id',

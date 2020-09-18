@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
-import IEnderecosRepository from '@modules/gcm/repositories/IEnderecosRepository';
-import ICreateEnderecosDTO from '@modules/gcm/dtos/ICreateEnderecosDTO';
+import IEnderecosRepository from '@modules/endereco/repositories/IEnderecosRepository';
+import ICreateEnderecosDTO from '@modules/endereco/dtos/ICreateEnderecosDTO';
 import Endereco from '../entities/Endereco';
 
 class EnderecosRepository implements IEnderecosRepository {
@@ -15,22 +15,18 @@ class EnderecosRepository implements IEnderecosRepository {
   public async create({
     logradouro,
     numero,
-    bairro,
     complemento,
-    estado,
-    cidade,
     cep,
-    codigo,
+    codigo_endereco,
+    bairro_id,
   }: ICreateEnderecosDTO): Promise<Endereco> {
     const endereco = this.ormRepository.create({
       logradouro,
       numero,
-      bairro,
       complemento,
-      estado,
-      cidade,
       cep,
-      codigo,
+      codigo_endereco,
+      bairro_id,
     });
 
     await this.ormRepository.save(endereco);
@@ -38,14 +34,16 @@ class EnderecosRepository implements IEnderecosRepository {
     return endereco;
   }
 
-  //* -> save on db
+  //* -> update on db
   public async save(endereco: Endereco): Promise<Endereco> {
     return this.ormRepository.save(endereco);
   }
 
   //* -> find on db
-  public async findById(id: string): Promise<Endereco | undefined> {
-    const enderecos = await this.ormRepository.findOne({ where: { id } });
+  public async findById(endereco_id: string): Promise<Endereco | undefined> {
+    const enderecos = await this.ormRepository.findOne({
+      where: { id: endereco_id },
+    });
 
     return enderecos;
   }

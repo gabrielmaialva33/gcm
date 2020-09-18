@@ -14,13 +14,13 @@ class Municipio {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 7 })
+  @Column({ type: 'varchar', length: 7, nullable: true })
   codigo_ibge: string;
 
   @Column({ type: 'varchar', length: 50 })
   municipio: string;
 
-  @Column({ type: 'varchar', length: 100 })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   gentilico: string;
 
   @Column({ type: 'uuid' })

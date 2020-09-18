@@ -17,10 +17,10 @@ class Bairro {
   @Column({ type: 'varchar', length: 100 })
   nome: string;
 
-  @Column({ type: 'varchar', length: 6 })
+  @Column({ type: 'varchar', length: 6, nullable: true })
   codigo_bairro: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   observacao: string;
 
   @Column({ type: 'uuid' })
