@@ -28,6 +28,7 @@ interface IRequest {
   zona_eleitoral: string;
   cnh: string;
   validade_cnh: Date;
+  tipo_cnh: string;
   observacao: string;
 }
 
@@ -66,6 +67,7 @@ class CreateDadosPessoaisService {
     zona_eleitoral,
     cnh,
     validade_cnh,
+    tipo_cnh,
     observacao,
   }: IRequest): Promise<DadosPessoais> {
     //* -> check exists and user role
@@ -127,6 +129,7 @@ class CreateDadosPessoaisService {
       zona_eleitoral,
       cnh,
       validade_cnh,
+      tipo_cnh,
       observacao,
     });
 

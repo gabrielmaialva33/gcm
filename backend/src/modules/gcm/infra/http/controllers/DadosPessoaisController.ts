@@ -32,6 +32,7 @@ class DadosPessoaisController {
       zona_eleitoral,
       cnh,
       validade_cnh,
+      tipo_cnh,
       observacao,
     } = request.body;
 
@@ -58,6 +59,7 @@ class DadosPessoaisController {
       zona_eleitoral,
       cnh,
       validade_cnh,
+      tipo_cnh,
       observacao,
     });
 
@@ -68,6 +70,30 @@ class DadosPessoaisController {
   public async update(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
     const { dados_pessoais_id } = request.params;
+    const {
+      nome,
+      rg,
+      cpf,
+      telefone,
+      celular,
+      nome_mae,
+      nome_pai,
+      data_nascimento,
+      municipio_nascimento,
+      sexo,
+      tipo_sanguineo,
+      estado_civil,
+      profissao,
+      escolaridade,
+      nome_conjulge,
+      nome_filhos,
+      titulo_eleitor,
+      zona_eleitoral,
+      cnh,
+      validade_cnh,
+      tipo_cnh,
+      observacao,
+    } = request.body;
 
     const updateDados = container.resolve(UpdateDadosPessoaisService);
     const dadosPessoais = await updateDados.execute({
@@ -93,8 +119,11 @@ class DadosPessoaisController {
       zona_eleitoral,
       cnh,
       validade_cnh,
+      tipo_cnh,
       observacao,
     });
+
+    return response.json(classToClass(dadosPessoais));
   }
 }
 

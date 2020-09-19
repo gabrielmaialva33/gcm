@@ -30,6 +30,7 @@ interface IRequest {
   zona_eleitoral: string;
   cnh: string;
   validade_cnh: Date;
+  tipo_cnh: string;
   observacao: string;
 }
 
@@ -68,7 +69,9 @@ class UpdateDadosPessoaisService {
     titulo_eleitor,
     zona_eleitoral,
     cnh,
+    tipo_cnh,
     validade_cnh,
+    observacao,
   }: IRequest): Promise<DadosPessoais> {
     // todo create checks
     //* -> find and check user_id exists and role
@@ -115,6 +118,8 @@ class UpdateDadosPessoaisService {
     dados_pessoais.zona_eleitoral = zona_eleitoral;
     dados_pessoais.cnh = cnh;
     dados_pessoais.validade_cnh = validade_cnh;
+    dados_pessoais.tipo_cnh = tipo_cnh;
+    dados_pessoais.observacao = observacao;
 
     await this.dadosPessoais.save(dados_pessoais);
 
