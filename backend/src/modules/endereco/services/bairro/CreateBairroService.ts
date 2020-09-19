@@ -33,7 +33,7 @@ class CreateBairroService {
       municipio,
     );
     if (!check_municipio) {
-      throw new AppError('Erro: Municipio não encontrado', 404);
+      throw new AppError('Municipio não encontrado', 404);
     }
 
     const bairro = await this.bairrosRepository.create({

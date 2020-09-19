@@ -31,7 +31,7 @@ class CreateMunicipioService {
     //* find and check estado exists
     const estado = await this.estadoRepository.findBySigla(sigla);
     if (!estado) {
-      throw new AppError('Erro: Estado não encontrado', 404);
+      throw new AppError('Estado não encontrado', 404);
     }
 
     const new_municipio = await this.municipioRepository.create({

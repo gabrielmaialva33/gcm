@@ -33,12 +33,12 @@ class UpdateMunicipioService {
     //* find and check estado exists
     const estado = await this.estadoRepository.findBySigla(sigla);
     if (!estado) {
-      throw new AppError('Erro: Estado não encontrado', 404);
+      throw new AppError('Estado não encontrado', 404);
     }
 
     const new_municipio = await this.municipioRepository.findById(municipio_id);
     if (!new_municipio) {
-      throw new AppError('Erro: Municipio não encontrado', 404);
+      throw new AppError('Municipio não encontrado', 404);
     }
 
     //* -> update data municipio

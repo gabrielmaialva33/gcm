@@ -35,12 +35,12 @@ class UpdateBairroService {
       municipio,
     );
     if (!check_municipio) {
-      throw new AppError('Erro: Municipio não encontrado', 404);
+      throw new AppError('Municipio não encontrado', 404);
     }
 
     const update_bairro = await this.bairrosRepository.findById(bairro_id);
     if (!update_bairro) {
-      throw new AppError('Erro: Bairro não encontrado', 404);
+      throw new AppError('Bairro não encontrado', 404);
     }
 
     //* -> update data bairro

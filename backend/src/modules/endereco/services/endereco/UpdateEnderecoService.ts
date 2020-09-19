@@ -37,13 +37,13 @@ class CreateEnderecoServices {
     //* -> find and check bairro exist
     const bairro_id = await this.bairrosRepository.findByNome(bairro);
     if (!bairro_id) {
-      throw new AppError('Erro: Bairro não encontrado', 404);
+      throw new AppError('Bairro não encontrado', 404);
     }
 
     //* -> find and check endereco exists
     const endereco = await this.enderecosRepository.findById(endereco_id);
     if (!endereco) {
-      throw new AppError('Erro: Endereço não encontrado', 404);
+      throw new AppError('Endereço não encontrado', 404);
     }
 
     //* -> update data endereco
