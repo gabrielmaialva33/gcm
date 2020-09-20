@@ -14,12 +14,12 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
       })
       .catch(err => {
         // eslint-disable-next-line no-console
-        console.log(` ❌  ${err.message}`);
+        console.log(` ❌   ${err.message}`);
       });
 
     //* -> check estado exists
     if (!municipio) {
-      throw new Error(' ❌ Municipio não encontrado');
+      throw new Error(' ❌   Municipio não encontrado');
     }
 
     //* inser values on dados_pessoais
@@ -28,22 +28,25 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
       .insert()
       .into(DadosPessoais)
       .values({
-        nome: 'Sebastião Ademar Gonçalves',
+        nome: 'Sebastião Ademar Gonçalves'.toUpperCase(),
         rg: '377953611',
         cpf: '72042940682',
         telefone: ['1535314445'],
         celular: ['15996962874'],
-        nome_mae: 'José Gonçalves Rosa',
-        nome_pai: 'Sebastiana Rosa dos Santos',
+        nome_mae: 'José Gonçalves Rosa'.toUpperCase(),
+        nome_pai: 'Sebastiana Rosa dos Santos'.toUpperCase(),
         data_nascimento: '08-13-1971',
         municipio_nascimento_id: municipio.id,
-        sexo: 'masculino',
+        sexo: 'masculino'.toUpperCase(),
         tipo_sanguineo: 'O+',
-        estado_civil: 'casado',
+        estado_civil: 'CASADO',
         profissao: [''],
-        escolaridade: '2º	Grau Completo',
-        nome_conjulge: '',
-        nome_filhos: ['Vitoria Caroline Gonçalves', 'Julia Gonçalves'],
+        escolaridade: '2º	Grau Completo'.toUpperCase(),
+        nome_conjulge: 'Gonçalves'.toUpperCase(),
+        nome_filhos: [
+          'Vitoria Caroline Gonçalves'.toUpperCase(),
+          'Julia Gonçalves'.toUpperCase(),
+        ],
         titulo_eleitor: '101811660272',
         zona_eleitoral: '057011',
         cnh: '02737170006',
@@ -54,7 +57,7 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
       .execute()
       .catch(err => {
         // eslint-disable-next-line no-console
-        console.log(` ❌  ${err.message}`);
+        console.log(` ❌   ${err.message}`);
       });
   }
 }

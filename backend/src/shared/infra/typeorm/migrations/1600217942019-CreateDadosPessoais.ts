@@ -66,15 +66,16 @@ export default class CreateDadosPessoais1600217942019
             name: 'sexo',
             type: 'varchar(10)',
           },
-          //! warn enum type
           {
             name: 'tipo_sanguineo',
-            type: 'varchar(2)',
+            type: 'enum',
+            enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
+            isNullable: true,
           },
-          //! warn enum type
           {
             name: 'estado_civil',
-            type: 'varchar(11)',
+            type: 'enum',
+            enum: ['CASADO', 'SEPARADO', 'DIVORCIADO', 'VIÚVO', 'SOLTEIRO'],
             isNullable: true,
           },
           {
@@ -119,7 +120,7 @@ export default class CreateDadosPessoais1600217942019
             type: 'date',
             isNullable: true,
           },
-          //! warn enum type
+          //! warn enum type ???
           {
             name: 'tipo_cnh',
             type: 'varchar(1)',

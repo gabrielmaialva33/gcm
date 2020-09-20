@@ -13,27 +13,27 @@ export default class SeedGcmGonsalves implements Seeder {
     //* -> find dados_pessoais
     const dados_pessoais = await dadosPessoaisRepo
       .findOne({
-        where: { cpf: '72042940682' },
+        where: { cpf: '72042940682', rg: '377953611' },
       })
       .catch(err => {
         // eslint-disable-next-line no-console
-        console.log(` ❌  ${err.message}`);
+        console.log(` ❌   ${err.message}`);
       });
     if (!dados_pessoais) {
-      throw new Error(' ❌ Dados Pessoais não encontrado');
+      throw new Error(' ❌  Dados Pessoais não encontrado');
     }
 
     //* -> find endereco
     const endereco = await enderecoRepo
       .findOne({
-        where: { logradouro: 'Rua João Prado Margarido', numero: '249' },
+        where: { logradouro: 'RUA JOÃO PRADO MARGARIDO', numero: '249' },
       })
       .catch(err => {
         // eslint-disable-next-line no-console
         console.log(` ❌  ${err.message}`);
       });
     if (!endereco) {
-      throw new Error(' ❌ Dados Pessoais não encontrado');
+      throw new Error(' ❌  Endereço não encontrado');
     }
 
     await connection

@@ -73,7 +73,7 @@ class CreateDadosPessoaisService {
     //* -> check exists and user role
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
-      throw new AppError('Usuário não encontrado', 404);
+      throw new AppError('Faça o login no sistema', 404);
     }
     if (!(user.regra === ('master' || 'admin'))) {
       throw new AppError('Usuário não permitido', 401);

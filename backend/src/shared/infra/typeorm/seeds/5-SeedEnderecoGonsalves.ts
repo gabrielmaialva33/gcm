@@ -9,9 +9,7 @@ export default class SeedEnderecoGonsalves implements Seeder {
     const bairroRepo = getRepository(Bairro);
 
     const bairro = await bairroRepo
-      .findOne({
-        where: { codigo_bairro: '1-02', nome: 'Vila Santa Terezinha' },
-      })
+      .findOne({ where: { codigo_bairro: '1-02' } })
       .catch(err => {
         // eslint-disable-next-line no-console
         console.log(` ❌  ${err.message}`);
@@ -26,7 +24,7 @@ export default class SeedEnderecoGonsalves implements Seeder {
       .insert()
       .into(Endereco)
       .values({
-        logradouro: 'Rua João Prado Margarido',
+        logradouro: 'RUA JOÃO PRADO MARGARIDO',
         numero: '249',
         complemento: '',
         cep: '18460-000',

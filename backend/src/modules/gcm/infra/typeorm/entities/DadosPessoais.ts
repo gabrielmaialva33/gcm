@@ -5,9 +5,22 @@ import {
   CreateDateColumn,
   OneToOne,
   JoinColumn,
+  BeforeInsert,
 } from 'typeorm';
 
 import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
+
+//* -> enum types
+export enum TipoSanguineo {
+  'A+',
+  'A-',
+  'B+',
+  'B-',
+  'AB+',
+  'AB-',
+  'O+',
+  'O-',
+}
 
 @Entity('dados_pessoais')
 class DadosPessoais {
@@ -48,17 +61,17 @@ class DadosPessoais {
   @Column({ type: 'varchar', length: 10 })
   sexo: string;
 
-  //! warn enum type
-  @Column({ type: 'varchar', length: 2 })
+  @Column({ type: 'enum', enum: TipoSanguineo, nullable: true })
   tipo_sanguineo: string;
 
-  //! warn enum type
+  //! -> warn enum type
   @Column({ type: 'varchar', length: 11, nullable: true })
   estado_civil: string;
 
   @Column({ type: 'varchar', length: 30, nullable: true })
   profissao: string[];
 
+  //! -> warn enum type
   @Column({ type: 'varchar', length: 30, nullable: true })
   escolaridade: string;
 
@@ -92,6 +105,25 @@ class DadosPessoais {
 
   @CreateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
   updated_at: Date;
+
+  //* -> data to uppercase
+  @BeforeInsert()
+  toUpperCase() {
+    this.nome = this.nome.toUpperCase();
+    this.nome_mae = this.nome_mae.toUpperCase();
+    this.nome_pai = this.nome_pai.toUpperCase();
+    this.sexo = this.sexo.toUpperCase();
+    this.estado_civil = this.estado_civil.toUpperCase();
+    this.profissao = this.profissao.map(i => {
+      return i.toUpperCase();
+    });
+    this.escolaridade = this.escolaridade.toUpperCase();
+    this.nome_conjulge = this.nome_conjulge.toUpperCase();
+    this.nome_filhos = this.nome_filhos.map(i => {
+      return i.toUpperCase();
+    });
+    this.observacao = this.observacao.toUpperCase();
+  }
 }
 
 export default DadosPessoais;

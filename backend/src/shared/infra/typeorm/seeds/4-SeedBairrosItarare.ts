@@ -42,11 +42,21 @@ export default class SeedBairrosItarare implements Seeder {
 
     // console.log(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]));
 
+    //* -> value to uppercase
+    const data = JSON.parse(
+      JSON.stringify(
+        XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]),
+        (a, b) => {
+          return typeof b === 'string' ? b.toUpperCase() : b;
+        },
+      ),
+    );
+
     await connection
       .createQueryBuilder()
       .insert()
       .into(Bairro)
-      .values(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]))
+      .values(data)
       .execute()
       .catch(err => {
         // eslint-disable-next-line no-console
