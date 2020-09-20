@@ -14,13 +14,13 @@ interface IRequest {
   municipio: string;
 }
 
-injectable();
+@injectable()
 class CreateBairroService {
   constructor(
     @inject('BairrosRepository')
     private bairrosRepository: IBairrosRepository,
 
-    @inject('MunicipioRepository')
+    @inject('MunicipiosRepository')
     private municipiosRepository: IMunicipiosRepository,
 
     @inject('UsersRepository')
