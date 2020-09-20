@@ -24,17 +24,20 @@ export default class SeedCidadesSP implements Seeder {
 
     //* -> xlsx to json
     const file = XLSX.readFile(`${__dirname}/xlsx/seed_cidades_sp.xlsx`);
+    const sheet = file.SheetNames;
 
     //* -> looping estado_id
     for (let i = 2; i <= 646; i += 1) {
-      XLSX.utils.sheet_add_json(file.Sheets.data, [{ estado_id: estado.id }], {
-        header: ['estado_id'],
-        skipHeader: true,
-        origin: `D${i}`,
-      });
+      XLSX.utils.sheet_add_json(
+        file.Sheets[sheet[0]],
+        [{ estado_id: estado.id }],
+        {
+          header: ['estado_id'],
+          skipHeader: true,
+          origin: `D${i}`,
+        },
+      );
     }
-
-    const sheet = file.SheetNames;
 
     await connection
       .createQueryBuilder()

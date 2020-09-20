@@ -47,7 +47,7 @@ class Gcm {
   @Column({
     type: 'enum',
     enum: Atribuicao,
-    default: Atribuicao.ADMINISTRATIVO,
+    default: Atribuicao.OFICIAL,
   })
   atribuicao: string;
 

@@ -16,7 +16,7 @@ export default class SeedEnderecoGonsalves implements Seeder {
       });
 
     if (!bairro) {
-      throw new Error(' ❌ Bairro não encontrado');
+      throw new Error(' ❌   Bairro não encontrado');
     }
 
     await connection

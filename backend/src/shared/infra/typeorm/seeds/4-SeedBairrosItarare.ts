@@ -11,7 +11,7 @@ export default class SeedBairrosItarare implements Seeder {
     const cidadeRepo = getRepository(Municipio);
 
     const municipio = await cidadeRepo
-      .findOne({ where: { codigo_ibge: '3523206', municipio: 'Itararé' } })
+      .findOne({ where: { codigo_ibge: '3523206' } })
       .catch(err => {
         // eslint-disable-next-line no-console
         console.log(` ❌  ${err.message}`);
@@ -19,16 +19,17 @@ export default class SeedBairrosItarare implements Seeder {
 
     //* -> check estado exists
     if (!municipio) {
-      throw new Error(' ❌ Estado não encontrado');
+      throw new Error(' ❌   Municipio não encontrado');
     }
 
     //* -> xlsx to json
     const file = XLSX.readFile(`${__dirname}/xlsx/seed_bairros_itarare.xlsx`);
+    const sheet = file.SheetNames;
 
     //* -> looping municipio_id
     for (let i = 2; i <= 86; i += 1) {
       XLSX.utils.sheet_add_json(
-        file.Sheets.data,
+        file.Sheets[sheet[0]],
         [{ municipio_id: municipio.id }],
         {
           header: ['municipio_id'],
@@ -38,25 +39,13 @@ export default class SeedBairrosItarare implements Seeder {
       );
     }
 
-    const sheet = file.SheetNames;
-
     // console.log(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]));
-
-    //* -> value to uppercase
-    const data = JSON.parse(
-      JSON.stringify(
-        XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]),
-        (a, b) => {
-          return typeof b === 'string' ? b.toUpperCase() : b;
-        },
-      ),
-    );
 
     await connection
       .createQueryBuilder()
       .insert()
       .into(Bairro)
-      .values(data)
+      .values(XLSX.utils.sheet_to_json(file.Sheets[sheet[0]]))
       .execute()
       .catch(err => {
         // eslint-disable-next-line no-console

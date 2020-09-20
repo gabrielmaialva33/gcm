@@ -101,7 +101,7 @@ class CreateDadosPessoaisService {
 
     //* find and check municipio
     const municipio = await this.minicipiosRepository.findByName(
-      municipio_nascimento,
+      municipio_nascimento.toUpperCase(),
     );
     if (!municipio) {
       throw new AppError('Municipio não encontrado', 404);

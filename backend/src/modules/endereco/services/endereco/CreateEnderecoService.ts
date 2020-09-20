@@ -10,8 +10,8 @@ interface IRequest {
   numero: string;
   complemento: string;
   cep: string;
-  codigo_endereco: string;
-  bairro: string;
+  codigo_endereco?: string;
+  bairro_id: string;
 }
 
 @injectable()
@@ -30,11 +30,11 @@ class CreateEnderecoServices {
     complemento,
     cep,
     codigo_endereco,
-    bairro,
+    bairro_id,
   }: IRequest): Promise<Endereco> {
     //* -> find and check bairro exist
-    const bairro_id = await this.bairrosRepository.findByNome(bairro);
-    if (!bairro_id) {
+    const bairro = await this.bairrosRepository.findById(bairro_id);
+    if (!bairro) {
       throw new AppError('Bairro não encontrado', 404);
     }
 
@@ -44,7 +44,7 @@ class CreateEnderecoServices {
       complemento,
       cep,
       codigo_endereco,
-      bairro_id: bairro_id.id,
+      bairro_id: bairro.id,
     });
 
     return endereco;

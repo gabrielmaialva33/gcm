@@ -8,6 +8,7 @@ interface IRequest {
   nome_guerra: string;
   dados_pessoais_id: string;
   endereco_id: string;
+  atribuicao: string;
 }
 
 @injectable()
@@ -21,6 +22,7 @@ class CreateCgmService {
     nome_guerra,
     dados_pessoais_id,
     endereco_id,
+    atribuicao,
   }: IRequest): Promise<Gcm> {
     //* -> checker exists
     const nomeGuerraExists = await this.gcmsRepository.findByNomeGuerra(
@@ -35,6 +37,7 @@ class CreateCgmService {
       nome_guerra,
       dados_pessoais_id,
       endereco_id,
+      atribuicao,
     });
 
     return gcm;

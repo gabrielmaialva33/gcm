@@ -4,8 +4,11 @@ import { container } from 'tsyringe';
 
 import CreateDadosPessoaisService from '@modules/gcm/services/dados_pessoais/CreateDadosPessoaisService';
 import UpdateDadosPessoaisService from '@modules/gcm/services/dados_pessoais/UpdateDadosPessoaisService';
+import CreateBairroService from '@modules/endereco/services/bairro/CreateBairroService';
+import CreateEnderecoServices from '@modules/endereco/services/endereco/CreateEnderecoService';
+import CreateCgmService from '@modules/gcm/services/gcm/CreateGcmService';
 
-class DadosPessoaisController {
+class GcmController {
   // todo show execute
 
   //* -> create execute
@@ -13,6 +16,7 @@ class DadosPessoaisController {
     const user_id = request.user.id;
 
     const {
+      // -> dados_pessoais data
       nome,
       rg,
       cpf,
@@ -35,8 +39,20 @@ class DadosPessoaisController {
       validade_cnh,
       tipo_cnh,
       observacao,
+      // -> bairro data
+      nome_bairro,
+      municipio,
+      // -> endereco data
+      logradouro,
+      numero,
+      complemento,
+      cep,
+      // -> gcm data
+      nome_guerra,
+      atribuicao,
     } = request.body;
 
+    //* -> execute create dados_pessoais
     const createDadosPessoais = container.resolve(CreateDadosPessoaisService);
     const dadosPessoais = await createDadosPessoais.execute({
       user_id,
@@ -64,7 +80,34 @@ class DadosPessoaisController {
       observacao,
     });
 
-    return response.json(classToClass(dadosPessoais));
+    //* -> execute create bairro
+    const createBairro = container.resolve(CreateBairroService);
+    const bairro = await createBairro.execute({
+      user_id,
+      nome: nome_bairro,
+      municipio,
+    });
+
+    //* -> execute create endereco
+    const createEndereco = container.resolve(CreateEnderecoServices);
+    const endereco = await createEndereco.execute({
+      logradouro,
+      numero,
+      complemento,
+      cep,
+      bairro_id: bairro.id,
+    });
+
+    //* -> execute create gcm
+    const createGcm = container.resolve(CreateCgmService);
+    const gcm = await createGcm.execute({
+      dados_pessoais_id: dadosPessoais.id,
+      endereco_id: endereco.id,
+      nome_guerra,
+      atribuicao,
+    });
+
+    return response.json(classToClass(gcm));
   }
 
   //* -> update execute
@@ -128,4 +171,4 @@ class DadosPessoaisController {
   }
 }
 
-export default new DadosPessoaisController();
+export default new GcmController();

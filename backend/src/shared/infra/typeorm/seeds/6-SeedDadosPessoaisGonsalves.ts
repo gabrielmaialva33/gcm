@@ -10,7 +10,7 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
 
     const municipio = await municipioRepo
       .findOne({
-        where: { codigo_ibge: '3113503', municipio: 'Carbonita' },
+        where: { codigo_ibge: '3113503' },
       })
       .catch(err => {
         // eslint-disable-next-line no-console

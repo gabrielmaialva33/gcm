@@ -16,11 +16,13 @@ class GcmsRepository implements IGcmsRepository {
     nome_guerra,
     dados_pessoais_id,
     endereco_id,
+    atribuicao,
   }: ICreateGcmsDTO): Promise<Gcm> {
     const gcm = this.ormRepository.create({
       nome_guerra,
       dados_pessoais_id,
       endereco_id,
+      atribuicao,
     });
     await this.ormRepository.save(gcm);
 
