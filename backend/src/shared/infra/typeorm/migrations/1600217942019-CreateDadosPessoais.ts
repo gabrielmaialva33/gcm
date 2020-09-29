@@ -28,7 +28,6 @@ export default class CreateDadosPessoais1600217942019
           {
             name: 'rg',
             type: 'varchar(15)',
-            isUnique: true,
           },
           {
             name: 'cpf',

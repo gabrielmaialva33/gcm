@@ -6,6 +6,7 @@ import {
   OneToOne,
   JoinColumn,
   BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
@@ -33,7 +34,7 @@ class DadosPessoais {
   @Column({ type: 'varchar', length: 15 })
   rg: string;
 
-  @Column({ type: 'varchar', length: 15 })
+  @Column({ type: 'varchar', length: 15, unique: true })
   cpf: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
@@ -108,6 +109,7 @@ class DadosPessoais {
 
   //* -> data to uppercase
   @BeforeInsert()
+  @BeforeUpdate()
   toUpperCase() {
     this.nome = this.nome.toUpperCase();
     this.nome_mae = this.nome_mae.toUpperCase();

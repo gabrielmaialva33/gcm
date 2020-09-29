@@ -91,7 +91,7 @@ class UpdateDadosPessoaisService {
 
     //* find and check municipio exists
     const municipio = await this.minicipiosRepository.findByName(
-      municipio_nascimento,
+      municipio_nascimento.toUpperCase(),
     );
     if (!municipio) {
       throw new AppError('Municipio não encontrado', 404);
