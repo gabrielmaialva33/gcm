@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import validator from 'validator';
 
 import IDadosPessoaisRepository from '@modules/gcm/repositories/IDadosPessoaisRepository';
 import IMunicipiosRepository from '@modules/endereco/repositories/IMunicipiosRepository';
@@ -86,6 +87,10 @@ class UpdateDadosPessoaisService {
       throw new AppError('Usuário não permitido', 401);
     }
 
+    //* ->  validing uuid string
+    if (!validator.isUUID(gcm_id)) {
+      throw new AppError('Parametro invalido', 400);
+    }
     //* -> find and check gcm exists
     const gcm = await this.gcmsRepository.findById(gcm_id);
     if (!gcm) {
