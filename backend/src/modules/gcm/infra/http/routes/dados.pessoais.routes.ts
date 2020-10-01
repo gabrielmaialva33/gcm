@@ -6,6 +6,6 @@ import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 const dadosPessoaisRoutes = Router();
 
 dadosPessoaisRoutes.use(ensureAuthenticated);
-dadosPessoaisRoutes.put('/:dados_pessoais_id', DadosPessoaisController.update);
+dadosPessoaisRoutes.put('/:gcm_id', DadosPessoaisController.update);
 
 export default dadosPessoaisRoutes;

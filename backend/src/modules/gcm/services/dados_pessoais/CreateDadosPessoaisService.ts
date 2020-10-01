@@ -80,10 +80,6 @@ class CreateDadosPessoaisService {
     }
 
     //* -> checker exists
-    const rgExists = await this.dadosPessoaisRepository.findByRg(rg);
-    if (rgExists) {
-      throw new AppError('RG já cadastrado.', 409);
-    }
     const cpfExists = await this.dadosPessoaisRepository.findByCpf(cpf);
     if (cpfExists) {
       throw new AppError('CPF já cadastrado.', 409);

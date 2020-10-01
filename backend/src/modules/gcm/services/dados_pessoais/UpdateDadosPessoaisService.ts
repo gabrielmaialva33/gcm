@@ -5,10 +5,11 @@ import IMunicipiosRepository from '@modules/endereco/repositories/IMunicipiosRep
 import IUsersRepository from '@modules/gcm/repositories/IUsersRepository';
 import DadosPessoais from '@modules/gcm/infra/typeorm/entities/DadosPessoais';
 import AppError from '@shared/errors/AppError';
+import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
 
 interface IRequest {
   user_id: string;
-  dados_pessoais_id: string;
+  gcm_id: string;
   //* data entity
   nome: string;
   rg: string;
@@ -38,10 +39,13 @@ interface IRequest {
 class UpdateDadosPessoaisService {
   constructor(
     @inject('DadosPessoaisRepository')
-    private dadosPessoais: IDadosPessoaisRepository,
+    private dadosPessoaisRepository: IDadosPessoaisRepository,
 
     @inject('MunicipiosRepository')
     private minicipiosRepository: IMunicipiosRepository,
+
+    @inject('GcmsRepository')
+    private gcmsRepository: IGcmsRepository,
 
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -49,7 +53,7 @@ class UpdateDadosPessoaisService {
 
   public async execute({
     user_id,
-    dados_pessoais_id,
+    gcm_id,
     nome,
     rg,
     cpf,
@@ -73,7 +77,6 @@ class UpdateDadosPessoaisService {
     validade_cnh,
     observacao,
   }: IRequest): Promise<DadosPessoais> {
-    // todo create checks
     //* -> find and check user_id exists and role
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
@@ -83,8 +86,16 @@ class UpdateDadosPessoaisService {
       throw new AppError('Usuário não permitido', 401);
     }
 
+    //* -> find and check gcm exists
+    const gcm = await this.gcmsRepository.findById(gcm_id);
+    if (!gcm) {
+      throw new AppError('Gcm não encontrado', 404);
+    }
+
     //* ->find and check dados_pessoais exists
-    const dados_pessoais = await this.dadosPessoais.findById(dados_pessoais_id);
+    const dados_pessoais = await this.dadosPessoaisRepository.findById(
+      gcm.dados_pessoais_id,
+    );
     if (!dados_pessoais) {
       throw new AppError('Dados Pessoais não encontrado', 404);
     }
@@ -95,6 +106,22 @@ class UpdateDadosPessoaisService {
     );
     if (!municipio) {
       throw new AppError('Municipio não encontrado', 404);
+    }
+
+    //* -> check data exists
+    const cpfExists = await this.dadosPessoaisRepository.findByCpf(cpf);
+    if (cpfExists) {
+      throw new AppError('CPF já cadastrado.', 409);
+    }
+    const tituloEleitorExists = await this.dadosPessoaisRepository.findByTituloEleitor(
+      titulo_eleitor,
+    );
+    if (tituloEleitorExists) {
+      throw new AppError('Titulo de Eleitor já cadastrado.', 409);
+    }
+    const chnExists = await this.dadosPessoaisRepository.findByCnh(cnh);
+    if (chnExists) {
+      throw new AppError('CNH já cadastrado.', 409);
     }
 
     //* -> data update
@@ -121,7 +148,7 @@ class UpdateDadosPessoaisService {
     dados_pessoais.tipo_cnh = tipo_cnh;
     dados_pessoais.observacao = observacao;
 
-    await this.dadosPessoais.save(dados_pessoais);
+    await this.dadosPessoaisRepository.save(dados_pessoais);
 
     return dados_pessoais;
   }

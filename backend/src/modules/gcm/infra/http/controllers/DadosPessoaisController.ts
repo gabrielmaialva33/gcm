@@ -6,7 +6,7 @@ import UpdateDadosPessoaisService from '@modules/gcm/services/dados_pessoais/Upd
 class DadosPessoaisController {
   public async update(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
-    const { dados_pessoais_id } = request.params;
+    const { gcm_id } = request.params;
 
     const {
       nome,
@@ -36,7 +36,7 @@ class DadosPessoaisController {
     const updateDados = container.resolve(UpdateDadosPessoaisService);
     const dadosPessoais = await updateDados.execute({
       user_id,
-      dados_pessoais_id,
+      gcm_id,
       nome,
       rg,
       cpf,

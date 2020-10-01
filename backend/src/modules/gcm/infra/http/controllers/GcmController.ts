@@ -16,7 +16,7 @@ class GcmController {
     const user_id = request.user.id;
 
     const {
-      // -> dados_pessoais data
+      // -> dados_pessoais
       nome,
       rg,
       cpf,
@@ -39,15 +39,15 @@ class GcmController {
       validade_cnh,
       tipo_cnh,
       observacao,
-      // -> bairro data
+      // -> bairro
       nome_bairro,
       municipio,
-      // -> endereco data
+      // -> endereco
       logradouro,
       numero,
       complemento,
       cep,
-      // -> gcm data
+      // -> gcm
       nome_guerra,
       atribuicao,
     } = request.body;
