@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import {} from 'validator';
 
 import IEnderecosRepository from '@modules/endereco/repositories/IEnderecosRepository';
 import IBairrosRepository from '@modules/endereco/repositories/IBairrosRepository';
