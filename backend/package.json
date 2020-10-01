@@ -25,6 +25,7 @@
     "tsyringe": "^4.3.0",
     "typeorm": "^0.2.25",
     "typeorm-seeding": "^1.6.1",
+    "validator": "^13.1.17",
     "xlsx": "^0.16.6"
   },
   "devDependencies": {
