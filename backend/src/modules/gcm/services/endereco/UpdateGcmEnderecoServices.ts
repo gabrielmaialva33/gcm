@@ -2,8 +2,10 @@ import { inject, injectable } from 'tsyringe';
 
 import IEnderecosRepository from '@modules/endereco/repositories/IEnderecosRepository';
 import IBairrosRepository from '@modules/endereco/repositories/IBairrosRepository';
+import IUsersRepository from '@modules/gcm/repositories/IUsersRepository';
 import Endereco from '@modules/endereco/infra/typeorm/entities/Endereco';
 import AppError from '@shared/errors/AppError';
+import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
 
 interface IRequest {
   user_id: string;
@@ -17,8 +19,14 @@ interface IRequest {
 }
 
 @injectable()
-class CreateEnderecoServices {
+class UpdateGcmEnderecoServices {
   constructor(
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
+
+    @inject('GcmsRepository')
+    private gcmsRepository: IGcmsRepository,
+
     @inject('EnderecosRepository')
     private enderecosRepository: IEnderecosRepository,
 
@@ -45,6 +53,12 @@ class CreateEnderecoServices {
       throw new AppError('Usuário não permitido', 401);
     }
 
+    //* -> find and check gcm exists
+    const gcm = await this.gcmsRepository.findById(gcm_id);
+    if (!gcm) {
+      throw new AppError('Gcm não encontrado', 404);
+    }
+
     //* -> find and check bairro exist
     const bairro_id = await this.bairrosRepository.findByNome(bairro);
     if (!bairro_id) {
@@ -52,7 +66,7 @@ class CreateEnderecoServices {
     }
 
     //* -> find and check endereco exists
-    const endereco = await this.enderecosRepository.findById(endereco_id);
+    const endereco = await this.enderecosRepository.findById(gcm.endereco_id);
     if (!endereco) {
       throw new AppError('Endereço não encontrado', 404);
     }
@@ -71,4 +85,4 @@ class CreateEnderecoServices {
   }
 }
 
-export default CreateEnderecoServices;
+export default UpdateGcmEnderecoServices;
