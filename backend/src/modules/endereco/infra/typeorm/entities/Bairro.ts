@@ -5,6 +5,8 @@ import {
   CreateDateColumn,
   OneToOne,
   JoinColumn,
+  BeforeInsert,
+  BeforeUpdate,
 } from 'typeorm';
 
 import Municipio from './Municipio';
@@ -35,6 +37,14 @@ class Bairro {
 
   @CreateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
   updated_at: Date;
+
+  //* -> data to uppercase
+  @BeforeInsert()
+  @BeforeUpdate()
+  toUpperCase() {
+    this.nome = this.nome.toUpperCase();
+    this.observacao = this.observacao.toUpperCase();
+  }
 }
 
 export default Bairro;

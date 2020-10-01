@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -41,6 +43,14 @@ class Endereco {
 
   @CreateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
   updated_at: Date;
+
+  //* -> data to uppercase
+  @BeforeInsert()
+  @BeforeUpdate()
+  toUpperCase() {
+    this.logradouro = this.logradouro.toUpperCase();
+    this.complemento = this.complemento.toUpperCase();
+  }
 }
 
 export default Endereco;
