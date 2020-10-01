@@ -14,12 +14,12 @@ interface IRequest {
   numero: string;
   complemento: string;
   cep: string;
-  codigo_endereco: string;
   bairro: string;
+  municipio: string;
 }
 
 @injectable()
-class UpdateGcmEnderecoServices {
+class UpdateEnderecoGcmServices {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -41,7 +41,6 @@ class UpdateGcmEnderecoServices {
     numero,
     complemento,
     cep,
-    codigo_endereco,
     bairro,
   }: IRequest): Promise<Endereco> {
     //* -> find and check user exists and permitions
@@ -76,7 +75,6 @@ class UpdateGcmEnderecoServices {
     endereco.numero = numero;
     endereco.complemento = complemento;
     endereco.cep = cep;
-    endereco.codigo_endereco = codigo_endereco;
     endereco.bairro_id = bairro_id.id;
 
     await this.enderecosRepository.save(endereco);
@@ -85,4 +83,4 @@ class UpdateGcmEnderecoServices {
   }
 }
 
-export default UpdateGcmEnderecoServices;
+export default UpdateEnderecoGcmServices;
