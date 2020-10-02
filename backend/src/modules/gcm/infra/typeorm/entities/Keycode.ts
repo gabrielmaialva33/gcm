@@ -10,7 +10,7 @@ import {
 import Gcm from './Gcm';
 
 @Entity('keycodes')
-class Keycodes {
+class Keycode {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -34,4 +34,4 @@ class Keycodes {
   updated_at: Date;
 }
 
-export default Keycodes;
+export default Keycode;
