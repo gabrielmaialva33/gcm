@@ -33,7 +33,7 @@ class CreateCgmService {
     }
 
     //* -> save on db
-    const gcm = this.gcmsRepository.create({
+    const gcm = await this.gcmsRepository.create({
       nome_guerra,
       dados_pessoais_id,
       endereco_id,

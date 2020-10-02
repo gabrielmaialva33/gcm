@@ -43,7 +43,9 @@ class Bairro {
   @BeforeUpdate()
   toUpperCase() {
     this.nome = this.nome.toUpperCase();
-    this.observacao = this.observacao.toUpperCase();
+    if (this.observacao) {
+      this.observacao = this.observacao.toUpperCase();
+    }
   }
 }
 
