@@ -41,10 +41,8 @@ class CreateKeycodeService {
       throw new AppError('Gcm não encontrado', 404);
     }
 
-    //* -> gen keycode
-    let keycode = crypto.randomBytes(8).toString('hex');
-
-    console.log(keycode);
+    //* -> gen keycode 8 digits
+    let keycode = crypto.randomBytes(4).toString('hex');
 
     //* -> check keycode exists
     const keycodeExists = await this.keycodesRepository.findByKeycode(keycode);

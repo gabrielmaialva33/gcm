@@ -7,6 +7,7 @@ import UpdateDadosPessoaisService from '@modules/gcm/services/dados_pessoais/Upd
 import CreateBairroService from '@modules/endereco/services/bairro/CreateBairroService';
 import CreateEnderecoServices from '@modules/endereco/services/endereco/CreateEnderecoService';
 import CreateCgmService from '@modules/gcm/services/gcm/CreateGcmService';
+import CreateKeycodeService from '@modules/gcm/services/keycode/CreateKeycodeService';
 
 class GcmController {
   // todo show execute
@@ -106,6 +107,10 @@ class GcmController {
       nome_guerra,
       atribuicao,
     });
+
+    //* -> gen keycode
+    const genKeycode = container.resolve(CreateKeycodeService);
+    await genKeycode.execute({ user_id, gcm_id: gcm.id });
 
     return response.json(classToClass(gcm));
   }

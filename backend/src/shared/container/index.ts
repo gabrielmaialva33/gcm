@@ -59,6 +59,6 @@ container.registerSingleton<IUsersRepository>(
 );
 
 container.registerSingleton<IKeycodesRepository>(
-  'KeycodeRepository',
+  'KeycodesRepository',
   KeycodesRepository,
 );

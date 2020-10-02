@@ -1,4 +1,6 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -32,6 +34,13 @@ class Keycode {
 
   @CreateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
   updated_at: Date;
+
+  //* -> data to uppercase
+  @BeforeInsert()
+  @BeforeUpdate()
+  toUpperCase() {
+    this.keycode = this.keycode.toUpperCase();
+  }
 }
 
 export default Keycode;
