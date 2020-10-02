@@ -24,6 +24,8 @@ class CreateCgmService {
     endereco_id,
     atribuicao,
   }: IRequest): Promise<Gcm> {
+    // todo check user_id
+
     //* -> checker exists
     const nomeGuerraExists = await this.gcmsRepository.findByNomeGuerra(
       nome_guerra,

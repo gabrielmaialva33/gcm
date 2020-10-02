@@ -22,7 +22,7 @@ import IEnderecosRepository from '@modules/endereco/repositories/IEnderecosRepos
 import EnderecosRepository from '@modules/endereco/infra/typeorm/repositories/EnderecosRepository';
 
 import IKeycodesRepository from '@modules/gcm/repositories/IKeycodesRepository';
-import KeycodeRepository from '@modules/gcm/infra/typeorm/repositories/KeycodesRepository';
+import KeycodesRepository from '@modules/gcm/infra/typeorm/repositories/KeycodesRepository';
 
 container.registerSingleton<IDadosPessoaisRepository>(
   'DadosPessoaisRepository',
@@ -60,5 +60,5 @@ container.registerSingleton<IUsersRepository>(
 
 container.registerSingleton<IKeycodesRepository>(
   'KeycodeRepository',
-  KeycodeRepository,
+  KeycodesRepository,
 );

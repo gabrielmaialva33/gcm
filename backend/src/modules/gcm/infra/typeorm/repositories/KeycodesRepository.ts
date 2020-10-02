@@ -4,7 +4,7 @@ import IKeycodesRepository from '@modules/gcm/repositories/IKeycodesRepository';
 import ICreateKeycodesDTO from '@modules/gcm/dtos/ICreateKeycodesDTO';
 import Keycode from '../entities/Keycode';
 
-class KeycodeRepository implements IKeycodesRepository {
+class KeycodesRepository implements IKeycodesRepository {
   private ormRepository: Repository<Keycode>;
 
   constructor() {
@@ -39,4 +39,4 @@ class KeycodeRepository implements IKeycodesRepository {
   }
 }
 
-export default KeycodeRepository;
+export default KeycodesRepository;
