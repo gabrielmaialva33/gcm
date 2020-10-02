@@ -21,6 +21,9 @@ import BairrosRepository from '@modules/endereco/infra/typeorm/repositories/Bair
 import IEnderecosRepository from '@modules/endereco/repositories/IEnderecosRepository';
 import EnderecosRepository from '@modules/endereco/infra/typeorm/repositories/EnderecosRepository';
 
+import IKeycodesRepository from '@modules/gcm/repositories/IKeycodesRepository';
+import KeycodeRepository from '@modules/gcm/infra/typeorm/repositories/KeycodesRepository';
+
 container.registerSingleton<IDadosPessoaisRepository>(
   'DadosPessoaisRepository',
   DadosPessoaisRepository,
@@ -53,4 +56,9 @@ container.registerSingleton<IGcmsRepository>('GcmsRepository', GcmsRepository);
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
+);
+
+container.registerSingleton<IKeycodesRepository>(
+  'KeycodeRepository',
+  KeycodeRepository,
 );
