@@ -111,20 +111,24 @@ class DadosPessoais {
   @BeforeInsert()
   @BeforeUpdate()
   toUpperCase() {
-    this.nome = this.nome.toUpperCase();
-    this.nome_mae = this.nome_mae.toUpperCase();
-    this.nome_pai = this.nome_pai.toUpperCase();
-    this.sexo = this.sexo.toUpperCase();
-    this.estado_civil = this.estado_civil.toUpperCase();
-    this.profissao = this.profissao.map(i => {
-      return i.toUpperCase();
-    });
-    this.escolaridade = this.escolaridade.toUpperCase();
-    this.nome_conjulge = this.nome_conjulge.toUpperCase();
-    this.nome_filhos = this.nome_filhos.map(i => {
-      return i.toUpperCase();
-    });
-    this.observacao = this.observacao.toUpperCase();
+    this.nome ? this.nome.toUpperCase() : null;
+    this.nome_mae ? this.nome_mae.toUpperCase() : null;
+    this.nome_pai ? this.nome_pai.toUpperCase() : null;
+    this.sexo ? this.sexo.toUpperCase() : null;
+    this.estado_civil ? this.estado_civil.toUpperCase() : null;
+    this.profissao
+      ? this.profissao.map(i => {
+          return i.toUpperCase();
+        })
+      : null;
+    this.escolaridade ? this.escolaridade.toUpperCase() : null;
+    this.nome_conjulge ? this.nome_conjulge.toUpperCase() : null;
+    this.nome_filhos
+      ? this.nome_filhos.map(i => {
+          return i.toUpperCase();
+        })
+      : null;
+    this.observacao ? this.observacao.toUpperCase() : null;
   }
 }
 

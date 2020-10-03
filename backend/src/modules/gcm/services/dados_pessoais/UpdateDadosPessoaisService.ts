@@ -4,15 +4,16 @@ import validator from 'validator';
 import IDadosPessoaisRepository from '@modules/gcm/repositories/IDadosPessoaisRepository';
 import IMunicipiosRepository from '@modules/endereco/repositories/IMunicipiosRepository';
 import IUsersRepository from '@modules/gcm/repositories/IUsersRepository';
+import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
 import DadosPessoais from '@modules/gcm/infra/typeorm/entities/DadosPessoais';
 import AppError from '@shared/errors/AppError';
-import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
+import Municipio from '@modules/endereco/infra/typeorm/entities/Municipio';
 
 interface IRequest {
   user_id: string;
   gcm_id: string;
   //* data entity
-  nome: string;
+  nome?: string;
   rg: string;
   cpf: string;
   telefone: string[];
@@ -105,11 +106,12 @@ class UpdateDadosPessoaisService {
       throw new AppError('Dados Pessoais não encontrado', 404);
     }
 
-    //* find and check municipio exists
+    //! find and check municipio exists
+
     const municipio = await this.minicipiosRepository.findByName(
-      municipio_nascimento.toUpperCase(),
+      municipio_nascimento ? municipio_nascimento.toUpperCase() : '',
     );
-    if (!municipio) {
+    if (!municipio && municipio_nascimento) {
       throw new AppError('Municipio não encontrado', 404);
     }
 
@@ -130,32 +132,37 @@ class UpdateDadosPessoaisService {
     }
 
     //* -> data update
-    dados_pessoais.nome = nome;
-    dados_pessoais.rg = rg;
-    dados_pessoais.cpf = cpf;
-    dados_pessoais.telefone = telefone;
-    dados_pessoais.celular = celular;
-    dados_pessoais.nome_mae = nome_mae;
-    dados_pessoais.nome_pai = nome_pai;
-    dados_pessoais.data_nascimento = data_nascimento;
-    dados_pessoais.municipio_nascimento_id = municipio.id;
-    dados_pessoais.sexo = sexo;
-    dados_pessoais.tipo_sanguineo = tipo_sanguineo;
-    dados_pessoais.estado_civil = estado_civil;
-    dados_pessoais.profissao = profissao;
-    dados_pessoais.escolaridade = escolaridade;
-    dados_pessoais.nome_conjulge = nome_conjulge;
-    dados_pessoais.nome_filhos = nome_filhos;
-    dados_pessoais.titulo_eleitor = titulo_eleitor;
-    dados_pessoais.zona_eleitoral = zona_eleitoral;
-    dados_pessoais.cnh = cnh;
-    dados_pessoais.validade_cnh = validade_cnh;
-    dados_pessoais.tipo_cnh = tipo_cnh;
-    dados_pessoais.observacao = observacao;
+    nome ? (dados_pessoais.nome = nome) : null;
+    rg ? (dados_pessoais.rg = rg) : null;
+    cpf ? (dados_pessoais.cpf = cpf) : null;
+    telefone ? (dados_pessoais.telefone = telefone) : null;
+    celular ? (dados_pessoais.celular = celular) : null;
+    nome_mae ? (dados_pessoais.nome_mae = nome_mae) : null;
+    nome_pai ? (dados_pessoais.nome_pai = nome_pai) : null;
+    data_nascimento ? (dados_pessoais.data_nascimento = data_nascimento) : null;
 
-    await this.dadosPessoaisRepository.save(dados_pessoais);
+    //* -> municipio_nascimento
+    municipio_nascimento
+      ? (dados_pessoais.municipio_nascimento_id = municipio
+          ? municipio.id
+          : dados_pessoais.municipio_nascimento_id)
+      : null;
 
-    return dados_pessoais;
+    sexo ? (dados_pessoais.sexo = sexo) : null;
+    tipo_sanguineo ? (dados_pessoais.tipo_sanguineo = tipo_sanguineo) : null;
+    estado_civil ? (dados_pessoais.estado_civil = estado_civil) : null;
+    profissao ? (dados_pessoais.profissao = profissao) : null;
+    escolaridade ? (dados_pessoais.escolaridade = escolaridade) : null;
+    nome_conjulge ? (dados_pessoais.nome_conjulge = nome_conjulge) : null;
+    nome_filhos ? (dados_pessoais.nome_filhos = nome_filhos) : null;
+    titulo_eleitor ? (dados_pessoais.titulo_eleitor = titulo_eleitor) : null;
+    zona_eleitoral ? (dados_pessoais.zona_eleitoral = zona_eleitoral) : null;
+    cnh ? (dados_pessoais.cnh = cnh) : null;
+    validade_cnh ? (dados_pessoais.validade_cnh = validade_cnh) : null;
+    tipo_cnh ? (dados_pessoais.tipo_cnh = tipo_cnh) : null;
+    dados_pessoais ? (dados_pessoais.observacao = observacao) : null;
+
+    return this.dadosPessoaisRepository.save(dados_pessoais);
   }
 }
 
