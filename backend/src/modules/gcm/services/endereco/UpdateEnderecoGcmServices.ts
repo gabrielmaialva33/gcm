@@ -7,6 +7,7 @@ import IUsersRepository from '@modules/gcm/repositories/IUsersRepository';
 import Endereco from '@modules/endereco/infra/typeorm/entities/Endereco';
 import AppError from '@shared/errors/AppError';
 import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
+import IMunicipiosRepository from '@modules/endereco/repositories/IMunicipiosRepository';
 
 interface IRequest {
   user_id: string;
@@ -33,6 +34,9 @@ class UpdateEnderecoGcmServices {
 
     @inject('BairrosRepository')
     private bairrosRepository: IBairrosRepository,
+
+    @inject('MunicipiosRepository')
+    private municipiosRepository: IMunicipiosRepository,
   ) {}
 
   public async execute({
@@ -43,6 +47,7 @@ class UpdateEnderecoGcmServices {
     complemento,
     cep,
     bairro,
+    municipio,
   }: IRequest): Promise<Endereco> {
     //* -> find and check user exists and permitions
     const user = await this.usersRepository.findById(user_id);
@@ -64,10 +69,14 @@ class UpdateEnderecoGcmServices {
     }
 
     //* -> find and check bairro exist
-    const bairro_id = await this.bairrosRepository.findByNome(bairro);
+    const bairro_id = await this.bairrosRepository.findByNome(
+      bairro.toUpperCase(),
+    );
     if (!bairro_id) {
       throw new AppError('Bairro não encontrado', 404);
     }
+
+    // todo municipio
 
     //* -> find and check endereco exists
     const endereco = await this.enderecosRepository.findById(gcm.endereco_id);
