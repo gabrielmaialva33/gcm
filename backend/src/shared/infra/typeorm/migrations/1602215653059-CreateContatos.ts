@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600217954439 implements MigrationInterface {
+export default class CreateContatos1602215653059 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'contatos',
         columns: [
           {
             name: 'id',
@@ -19,31 +19,16 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome_usuario',
-            type: 'varchar(15)',
-            isUnique: true,
-          },
-          {
-            name: 'email',
+            name: 'nome',
             type: 'varchar(30)',
           },
           {
-            name: 'senha',
-            type: 'varchar',
-          },
-          {
-            name: 'regra',
-            type: 'enum',
-            default: "'MEMBRO'",
-            enum: ['ADMIN', 'MASTER', 'MEMBRO'],
-          },
-          {
-            name: 'avatar',
-            type: 'varchar',
+            name: 'telefone',
+            type: 'varchar(20)[]',
             isNullable: true,
           },
           {
-            name: 'gcm_id',
+            name: 'endereco_id',
             type: 'uuid',
           },
           {
@@ -60,14 +45,14 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
       }),
     );
 
-    //* -> foreignkey gcms
+    //* -> foreignkey enderecos
     await queryRunner.createForeignKey(
-      'users',
+      'contatos',
       new TableForeignKey({
-        name: 'gcm_fk',
-        columnNames: ['gcm_id'],
+        name: 'endereco_fk',
+        columnNames: ['endereco_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'gcms',
+        referencedTableName: 'enderecos',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
@@ -75,7 +60,7 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'gcm_fk');
-    await queryRunner.dropTable('users');
+    await queryRunner.dropForeignKey('contatos', 'endereco_fk');
+    await queryRunner.dropTable('contatos');
   }
 }

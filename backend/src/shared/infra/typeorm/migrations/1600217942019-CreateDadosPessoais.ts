@@ -40,11 +40,6 @@ export default class CreateDadosPessoais1600217942019
             isNullable: true,
           },
           {
-            name: 'celular',
-            type: 'varchar(20)[]',
-            isNullable: true,
-          },
-          {
             name: 'nome_mae',
             type: 'varchar(40)',
           },
@@ -63,7 +58,9 @@ export default class CreateDadosPessoais1600217942019
           },
           {
             name: 'sexo',
-            type: 'varchar(10)',
+            type: 'enum',
+            enum: ['MASCULINO', 'FEMININO'],
+            default: "'MASCULINO'",
           },
           {
             name: 'tipo_sanguineo',
@@ -84,7 +81,18 @@ export default class CreateDadosPessoais1600217942019
           },
           {
             name: 'escolaridade',
-            type: 'varchar(30)',
+            type: 'enum',
+            enum: [
+              'FUNDAMENTAL-INCOMPLETO',
+              'FUNDAMENTAL-COMPLETO',
+              'MEDIO-INCOMPLETO',
+              'MEDIO-COMPLETO',
+              'SUPERIOR-INCOMPLETO',
+              'SUPERIOR-COMPLETO',
+              'POS-GRADUACAO-INCOMPLETO',
+              'POS-GRADUACAO-COMPLETO',
+              'MESTRADO',
+            ],
             isNullable: true,
           },
           {
@@ -122,7 +130,7 @@ export default class CreateDadosPessoais1600217942019
           //! warn enum type ???
           {
             name: 'tipo_cnh',
-            type: 'varchar(1)',
+            type: 'varchar(3)',
             isNullable: true,
           },
           {
@@ -132,19 +140,19 @@ export default class CreateDadosPessoais1600217942019
           },
           {
             name: 'created_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'updated_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],
       }),
     );
 
-    //* -> foreignkey estados
+    //* -> foreignkey municipios
     await queryRunner.createForeignKey(
       'dados_pessoais',
       new TableForeignKey({

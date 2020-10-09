@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600217954439 implements MigrationInterface {
+export default class CreateTurnos1602214094176 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'escalas_gcms',
         columns: [
           {
             name: 'id',
@@ -19,32 +19,27 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome_usuario',
-            type: 'varchar(15)',
-            isUnique: true,
+            name: 'gcm_id',
+            type: 'uuid',
           },
           {
-            name: 'email',
-            type: 'varchar(30)',
+            name: 'escala_id',
+            type: 'uuid',
           },
           {
-            name: 'senha',
-            type: 'varchar',
-          },
-          {
-            name: 'regra',
-            type: 'enum',
-            default: "'MEMBRO'",
-            enum: ['ADMIN', 'MASTER', 'MEMBRO'],
-          },
-          {
-            name: 'avatar',
-            type: 'varchar',
+            name: 'data_inicio',
+            type: 'timestamp with time zone',
             isNullable: true,
           },
           {
-            name: 'gcm_id',
-            type: 'uuid',
+            name: 'data_fim',
+            type: 'timestamp with time zone',
+            isNullable: true,
+          },
+          {
+            name: 'observacao',
+            type: 'text',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -62,7 +57,7 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
 
     //* -> foreignkey gcms
     await queryRunner.createForeignKey(
-      'users',
+      'escalas_gcms',
       new TableForeignKey({
         name: 'gcm_fk',
         columnNames: ['gcm_id'],
@@ -72,10 +67,24 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
         onUpdate: 'CASCADE',
       }),
     );
+
+    //* -> foreignkey escalas
+    await queryRunner.createForeignKey(
+      'escalas_gcms',
+      new TableForeignKey({
+        name: 'escala_fk',
+        columnNames: ['escala_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'escalas',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'gcm_fk');
-    await queryRunner.dropTable('users');
+    await queryRunner.dropForeignKey('escalas_gcms', 'gcm_fk');
+    await queryRunner.dropForeignKey('escalas_gcms', 'escala_fk');
+    await queryRunner.dropTable('escalas_gcms');
   }
 }

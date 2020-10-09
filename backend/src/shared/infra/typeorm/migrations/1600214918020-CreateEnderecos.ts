@@ -48,12 +48,12 @@ export default class CreateEnderecos1600214918020
           },
           {
             name: 'created_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'updated_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],

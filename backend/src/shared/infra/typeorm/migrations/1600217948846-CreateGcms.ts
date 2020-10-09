@@ -39,14 +39,14 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
           {
             name: 'atribuicao',
             type: 'enum',
-            default: "'administrativo'",
+            default: "'ADMINISTRATIVO'",
             enum: [
-              'comandante',
-              'sub_comandante',
-              'administrativo',
-              'coi',
-              'supervisor',
-              'oficial',
+              'COMANDANTE',
+              'SUB_COMANDANTE',
+              'ADMINISTRATIVO',
+              'COI',
+              'SUPERVISOR',
+              'OFICIAL',
             ],
           },
           {
@@ -54,7 +54,6 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
             type: 'varchar(200)[]',
             isNullable: true,
           },
-          //! warn enum type
           {
             name: 'status',
             type: 'boolean',
@@ -62,12 +61,12 @@ export default class CreateGcms1600217948846 implements MigrationInterface {
           },
           {
             name: 'created_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'updated_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],

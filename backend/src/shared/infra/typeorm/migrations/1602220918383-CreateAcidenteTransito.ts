@@ -5,11 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600217954439 implements MigrationInterface {
+export default class CreateAcidenteTransito1602220918383
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'acidentes',
         columns: [
           {
             name: 'id',
@@ -19,32 +20,31 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome_usuario',
+            name: 'ocorrencia_id',
+            type: 'uuid',
+          },
+          {
+            name: 'tipo_acidente',
             type: 'varchar(15)',
-            isUnique: true,
           },
           {
-            name: 'email',
-            type: 'varchar(30)',
-          },
-          {
-            name: 'senha',
-            type: 'varchar',
-          },
-          {
-            name: 'regra',
-            type: 'enum',
-            default: "'MEMBRO'",
-            enum: ['ADMIN', 'MASTER', 'MEMBRO'],
-          },
-          {
-            name: 'avatar',
-            type: 'varchar',
+            name: 'semaforo',
+            type: 'varchar(15)',
             isNullable: true,
           },
           {
-            name: 'gcm_id',
-            type: 'uuid',
+            name: 'tipo_pista',
+            type: 'varchar(15)',
+          },
+          {
+            name: 'condicao_pista',
+            type: 'varchar(15)',
+            isNullable: true,
+          },
+          {
+            name: 'observacao',
+            type: 'text',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -60,14 +60,14 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
       }),
     );
 
-    //* -> foreignkey gcms
+    //* -> foreignkey ocorrencias
     await queryRunner.createForeignKey(
-      'users',
+      'acidentes',
       new TableForeignKey({
-        name: 'gcm_fk',
-        columnNames: ['gcm_id'],
+        name: 'ocorrencia_fk',
+        columnNames: ['ocorrencia_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'gcms',
+        referencedTableName: 'ocorrencias',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
@@ -75,7 +75,7 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'gcm_fk');
-    await queryRunner.dropTable('users');
+    await queryRunner.dropForeignKey('acidentes', 'ocorrencia_fk');
+    await queryRunner.dropTable('acidentes');
   }
 }

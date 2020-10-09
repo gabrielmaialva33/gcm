@@ -5,11 +5,12 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600217954439 implements MigrationInterface {
+export default class CreateAnexosOcorrencias1602218951163
+  implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'anexos_ocorrencias',
         columns: [
           {
             name: 'id',
@@ -19,31 +20,11 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome_usuario',
-            type: 'varchar(15)',
-            isUnique: true,
+            name: 'ocorrencia_id',
+            type: 'uuid',
           },
           {
-            name: 'email',
-            type: 'varchar(30)',
-          },
-          {
-            name: 'senha',
-            type: 'varchar',
-          },
-          {
-            name: 'regra',
-            type: 'enum',
-            default: "'MEMBRO'",
-            enum: ['ADMIN', 'MASTER', 'MEMBRO'],
-          },
-          {
-            name: 'avatar',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'gcm_id',
+            name: 'anexo_id',
             type: 'uuid',
           },
           {
@@ -60,14 +41,27 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
       }),
     );
 
-    //* -> foreignkey gcms
+    //* -> foreignkey ocorrencias
     await queryRunner.createForeignKey(
-      'users',
+      'anexos_ocorrencias',
       new TableForeignKey({
-        name: 'gcm_fk',
-        columnNames: ['gcm_id'],
+        name: 'ocorrencia_fk',
+        columnNames: ['ocorrencia_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'gcms',
+        referencedTableName: 'ocorrencias',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      }),
+    );
+
+    //* -> foreignkey anexos
+    await queryRunner.createForeignKey(
+      'anexos_ocorrencias',
+      new TableForeignKey({
+        name: 'anexo_fk',
+        columnNames: ['anexo_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'anexos',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
@@ -75,7 +69,8 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'gcm_fk');
-    await queryRunner.dropTable('users');
+    await queryRunner.dropForeignKey('anexos_ocorrencias', 'ocorrencia_fk');
+    await queryRunner.dropForeignKey('anexos_ocorrencias', 'anexo_fk');
+    await queryRunner.dropTable('anexos_ocorrencias');
   }
 }

@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateBairros1599248227641 implements MigrationInterface {
+export default class CreateVeiculos1602221376872 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'bairros',
+        name: 'veiculos',
         columns: [
           {
             name: 'id',
@@ -19,22 +19,50 @@ export default class CreateBairros1599248227641 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'codigo_bairro',
-            type: 'varchar(6)',
-            isNullable: true,
+            name: 'registro',
+            type: 'int',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
-            name: 'nome',
-            type: 'varchar(100)',
+            name: 'renavam',
+            type: 'varchar(15)',
           },
           {
-            name: 'observacao',
-            type: 'text',
-            isNullable: true,
+            name: 'placa',
+            type: 'varchar(10)',
           },
           {
             name: 'municipio_id',
             type: 'uuid',
+          },
+          {
+            name: 'chassi',
+            type: 'varchar(20)',
+          },
+          {
+            name: 'marca',
+            type: 'varchar(10)',
+          },
+          {
+            name: 'modelo',
+            type: 'varchar(10)',
+          },
+          {
+            name: 'tipo_especie',
+            type: 'varchar(10)',
+          },
+          {
+            name: 'cor',
+            type: 'varchar(10)',
+          },
+          {
+            name: 'categoria',
+            type: 'varchar(15)',
+          },
+          {
+            name: 'ano',
+            type: 'date',
           },
           {
             name: 'created_at',
@@ -50,9 +78,9 @@ export default class CreateBairros1599248227641 implements MigrationInterface {
       }),
     );
 
-    //* -> foreignkey estados
+    //* -> foreignkey municipios
     await queryRunner.createForeignKey(
-      'bairros',
+      'veiculos',
       new TableForeignKey({
         name: 'municipio_fk',
         columnNames: ['municipio_id'],
@@ -65,7 +93,7 @@ export default class CreateBairros1599248227641 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('bairros', 'municipio_fk');
-    await queryRunner.dropTable('bairros');
+    await queryRunner.dropForeignKey('veiculos', 'municipio_fk');
+    await queryRunner.dropTable('veiculos');
   }
 }

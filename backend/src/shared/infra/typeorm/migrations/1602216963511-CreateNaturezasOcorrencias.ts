@@ -1,16 +1,11 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateGcmsKeycode1601612161408
+export default class CreateNaturezasOcorrencias1602216963511
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'keycodes',
+        name: 'naturezas_ocorrencias',
         columns: [
           {
             name: 'id',
@@ -20,17 +15,15 @@ export default class CreateGcmsKeycode1601612161408
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'keycode',
-            type: 'varchar(8)',
-            isUnique: true,
+            name: 'codigo_natureza',
+            type: 'varchar(3)',
           },
           {
-            name: 'gcm_id',
-            type: 'uuid',
-            isUnique: true,
+            name: 'natureza',
+            type: 'varchar(20)',
           },
           {
-            name: 'active',
+            name: 'criminal',
             type: 'boolean',
             default: true,
           },
@@ -47,23 +40,9 @@ export default class CreateGcmsKeycode1601612161408
         ],
       }),
     );
-
-    //* -> foreignkey gcms
-    await queryRunner.createForeignKey(
-      'keycodes',
-      new TableForeignKey({
-        name: 'gcm_fk',
-        columnNames: ['gcm_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'gcms',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-      }),
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('keycodes', 'gcm_fk');
-    await queryRunner.dropTable('keycodes');
+    await queryRunner.dropTable('naturezas_ocorrencias');
   }
 }

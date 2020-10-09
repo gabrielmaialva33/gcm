@@ -4,10 +4,10 @@ import validator from 'validator';
 import IEnderecosRepository from '@modules/endereco/repositories/IEnderecosRepository';
 import IBairrosRepository from '@modules/endereco/repositories/IBairrosRepository';
 import IUsersRepository from '@modules/gcm/repositories/IUsersRepository';
+import IMunicipiosRepository from '@modules/endereco/repositories/IMunicipiosRepository';
 import Endereco from '@modules/endereco/infra/typeorm/entities/Endereco';
 import AppError from '@shared/errors/AppError';
 import IGcmsRepository from '@modules/gcm/repositories/IGcmsRepository';
-import IMunicipiosRepository from '@modules/endereco/repositories/IMunicipiosRepository';
 
 interface IRequest {
   user_id: string;
@@ -62,21 +62,28 @@ class UpdateEnderecoGcmServices {
     if (!validator.isUUID(gcm_id)) {
       throw new AppError('Parametro invalido', 400);
     }
+
     //* -> find and check gcm exists
     const gcm = await this.gcmsRepository.findById(gcm_id);
     if (!gcm) {
       throw new AppError('Gcm não encontrado', 404);
     }
 
-    //* -> find and check bairro exist
+    //* -> find and check bairro exists
     const bairro_id = await this.bairrosRepository.findByNome(
       bairro.toUpperCase(),
     );
+    //! warn
     if (!bairro_id) {
       throw new AppError('Bairro não encontrado', 404);
     }
-
-    // todo municipio
+    //* -> find and check municipio exists
+    const municipioExists = await this.municipiosRepository.findByName(
+      municipio.toLocaleUpperCase(),
+    );
+    if (!municipioExists) {
+      throw new AppError('Municipio não encontrado', 404);
+    }
 
     //* -> find and check endereco exists
     const endereco = await this.enderecosRepository.findById(gcm.endereco_id);

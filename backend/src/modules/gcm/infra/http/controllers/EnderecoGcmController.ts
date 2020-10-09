@@ -9,24 +9,24 @@ class EnderecoGcmController {
     const user_id = request.user.id;
     const { gcm_id } = request.params;
     const {
-      bairro,
-      municipio,
       logradouro,
       numero,
       complemento,
       cep,
+      bairro,
+      municipio,
     } = request.body;
 
     const updateEnderecoGcm = container.resolve(UpdateEnderecoGcmServices);
     const endereco = await updateEnderecoGcm.execute({
       user_id,
       gcm_id,
-      bairro,
-      municipio,
       logradouro,
       numero,
       complemento,
       cep,
+      bairro,
+      municipio,
     });
 
     return response.json(classToClass(endereco));

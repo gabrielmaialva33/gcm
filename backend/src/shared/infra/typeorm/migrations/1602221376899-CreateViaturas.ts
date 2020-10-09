@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateUsers1600217954439 implements MigrationInterface {
+export default class CreateViaturas1602221376899 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+        name: 'viaturas',
         columns: [
           {
             name: 'id',
@@ -19,32 +19,18 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'nome_usuario',
-            type: 'varchar(15)',
-            isUnique: true,
-          },
-          {
-            name: 'email',
-            type: 'varchar(30)',
-          },
-          {
-            name: 'senha',
-            type: 'varchar',
-          },
-          {
-            name: 'regra',
-            type: 'enum',
-            default: "'MEMBRO'",
-            enum: ['ADMIN', 'MASTER', 'MEMBRO'],
-          },
-          {
-            name: 'avatar',
-            type: 'varchar',
-            isNullable: true,
-          },
-          {
-            name: 'gcm_id',
+            name: 'veiculo_id',
             type: 'uuid',
+          },
+          {
+            name: 'uso',
+            type: 'boolean',
+            default: false,
+          },
+          {
+            name: 'observacao',
+            type: 'text',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -60,14 +46,14 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
       }),
     );
 
-    //* -> foreignkey gcms
+    //* -> foreignkey veiculos
     await queryRunner.createForeignKey(
-      'users',
+      'viaturas',
       new TableForeignKey({
-        name: 'gcm_fk',
-        columnNames: ['gcm_id'],
+        name: 'veiculo_fk',
+        columnNames: ['veiculo_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'gcms',
+        referencedTableName: 'veiculos',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',
       }),
@@ -75,7 +61,7 @@ export default class CreateUsers1600217954439 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'gcm_fk');
-    await queryRunner.dropTable('users');
+    await queryRunner.dropForeignKey('viaturas', 'veiculo_fk');
+    await queryRunner.dropTable('viaturas');
   }
 }

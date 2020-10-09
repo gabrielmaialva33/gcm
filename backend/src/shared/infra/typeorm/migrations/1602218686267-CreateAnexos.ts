@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateEstados1598987298856 implements MigrationInterface {
+export default class CreateAnexos1602218686267 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'estados',
+        name: 'anexos',
         columns: [
           {
             name: 'id',
@@ -14,20 +14,19 @@ export default class CreateEstados1598987298856 implements MigrationInterface {
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'codigo_ibge',
-            type: 'varchar(2)',
+            name: 'caminho',
+            type: 'varchar',
           },
           {
-            name: 'uf',
-            type: 'varchar(50)',
+            name: 'tipo',
+            type: 'enum',
+            enum: ['VIDEO', 'IMAGEM', 'DOC'],
+            default: "'IMAGEM'",
           },
           {
-            name: 'sigla',
-            type: 'varchar(2)',
-          },
-          {
-            name: 'gentilico',
-            type: 'varchar(100)',
+            name: 'observacao',
+            type: 'text',
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -45,6 +44,6 @@ export default class CreateEstados1598987298856 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('estados');
+    await queryRunner.dropTable('anexos');
   }
 }

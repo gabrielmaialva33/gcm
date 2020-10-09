@@ -39,12 +39,12 @@ export default class CreateMunicipios1599023076328
           },
           {
             name: 'created_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
           {
             name: 'updated_at',
-            type: ' timestamp with time zone',
+            type: 'timestamp with time zone',
             default: 'now()',
           },
         ],
