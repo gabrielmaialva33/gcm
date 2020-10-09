@@ -40,9 +40,6 @@ class DadosPessoais {
   @Column({ type: 'varchar', length: 20, nullable: true })
   telefone: string[];
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
-  celular: string[];
-
   @Column({ type: 'varchar', length: 40 })
   nome_mae: string;
 

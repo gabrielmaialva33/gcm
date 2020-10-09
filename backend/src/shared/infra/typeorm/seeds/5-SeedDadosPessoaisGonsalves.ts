@@ -31,8 +31,7 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
         nome: 'Sebastião Ademar Gonçalves'.toUpperCase(),
         rg: '377953611',
         cpf: '72042940682',
-        telefone: ['1535314445'],
-        celular: ['15996962874'],
+        telefone: ['1535314445', '15996962874'],
         nome_mae: 'José Gonçalves Rosa'.toUpperCase(),
         nome_pai: 'Sebastiana Rosa dos Santos'.toUpperCase(),
         data_nascimento: '08-13-1971',
@@ -41,7 +40,7 @@ export default class SeedDadosPessoaisGonsalves implements Seeder {
         tipo_sanguineo: 'O+',
         estado_civil: 'CASADO',
         profissao: [''],
-        escolaridade: '2º	Grau Completo'.toUpperCase(),
+        escolaridade: 'FUNDAMENTAL-COMPLETO',
         nome_conjulge: 'Gonçalves'.toUpperCase(),
         nome_filhos: [
           'Vitoria Caroline Gonçalves'.toUpperCase(),

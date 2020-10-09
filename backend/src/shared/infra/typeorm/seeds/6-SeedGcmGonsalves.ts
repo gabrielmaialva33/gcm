@@ -44,7 +44,7 @@ export default class SeedGcmGonsalves implements Seeder {
         dados_pessoais_id: dados_pessoais.id,
         endereco_id: endereco.id,
         nome_guerra: 'Gonsalves',
-        atribuicao: 'administrativo',
+        atribuicao: 'ADMINISTRATIVO',
         historico: [''],
         status: true,
       })

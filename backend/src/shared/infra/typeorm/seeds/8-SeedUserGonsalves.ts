@@ -30,7 +30,7 @@ export default class SeedUserGonsalves implements Seeder {
         nome_usuario: 'gonsalves',
         email: 'gonsalves@gmail.com',
         senha: hashedSenha,
-        regra: 'master',
+        regra: 'MASTER',
         avatar: '',
         gcm_id: gcm.id,
       })
